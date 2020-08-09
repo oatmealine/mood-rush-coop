@@ -1,0 +1,105 @@
+<Mods LoadCommand="%xero(function(self)
+	-- wenis times (setup)
+
+	oat_randomvert:hidden(1)
+	
+	-- util funcs
+	function table.contains(table, element)
+		for _, value in pairs(table) do
+			if value == element then
+				return true
+			end
+		end
+		return false
+	end
+
+	local function confOff(deg)
+		return math.rad(deg) * 100
+	end
+
+	local randomVert = oat_randomvert:GetShader()
+
+	local function enableVert(shader, players)
+		players = players or {1, 2, 3, 4}
+
+		for _,p in ipairs(players) do
+			P[p]:SetArrowShader(shader)
+			P[p]:SetHoldShader(shader)
+		end
+	end
+
+	local function disableVert()
+		enableVert('nothing') -- no other way ..... ha ha
+	end
+
+	local function enableRandVert(players)
+		enableVert(randomVert, players)
+	end
+
+	local slump = GAMESTATE:GetCurrentSteps(0):GetDifficulty() == 5
+
+	-- eases
+	local function onoff(x)
+		return (x >= 1) and 0 or 1
+	end
+
+	local function reverse(x)
+		return 1 - x
+	end
+
+	local function createReverse(func)
+		return function(x)
+			return 1 - func(x)
+		end
+	end
+
+	local function createTemp(func)
+		return function(x)
+			if x > 0.999 then
+				return 0
+			end
+			return func(x)
+		end
+	end
+
+	local function bounc(a)
+		if a < 0.5 then
+			return outCirc(a/2)
+		else
+			return inCirc(a/2-1)
+		end
+	end
+
+	-- custom modd de
+
+	alias {'arrowfuck', function(a)
+		randomVert:uniform1f('amp', a)
+	end}
+
+	alias {'fuckarrow', function(a)
+		randomVert:uniform1f('amp', a)
+	end}
+
+	alias {'stealth2', function(a)
+		randomVert:uniform1f('stealth', a)
+	end}
+
+	-- The Real wenis times
+
+	func {174, function() enableRandVert({2}) end}
+
+	ease {176, 3, createReverse(outCirc), 20, 'fuckarrow', 1, 'stealth2'}
+
+	set {180, 90, 'fuckarrow', 90, 'arrowfuck'}
+
+end)"
+	Type = "ActorFrame"
+><children>
+
+	<!-- sprites only made for shaders -->
+	<Layer Type="Sprite" Texture="white" Vert="shaders/truerandom.vert" Name="oat_randomvert"/>
+
+	<!-- notedata -->
+	<CODE File="funihold.xml"/>
+
+</children></Mods>

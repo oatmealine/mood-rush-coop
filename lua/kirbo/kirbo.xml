@@ -1,0 +1,57 @@
+<Mods LoadCommand="%xero(function(self)
+	-- hello yes, i'm dumping all the stuff i used, mom, dont look ~Kirby
+	local sqrt = math.sqrt
+	local sin = math.sin
+	local cos = math.cos
+	local pow = math.pow
+	local exp = math.exp
+	local pi = math.pi
+	local abs = math.abs
+	local kick_cache = {}
+	
+	local function kick(amt)
+		kick_cache[amt] = kick_cache[amt] or function(t)
+			return (sqrt(t) * pow(1 - t, amt)) * (2.5 + amt * .6)
+		end
+		return kick_cache[amt]
+	end
+	
+	local function square(t) return t == 1 and 0 or 1 end
+	
+	local m_ea, mm = ease, func
+	
+	--[[
+	lists of eases that can be used:
+	(Persistent)
+		instant				linear
+		inQuad				outQuad			inOutQuad			inCubic			outCubic
+		inOutCubic			inQuart			outQuart			inOutQuart		inQuint
+		outQuint			inOutQuint		inExpo				outExpo			inOutExpo
+		inBack				outBack			inOutBack			inElastic		outElastic	
+		inOutElastic		inBounce		outBounce			inOutBounce		inSine
+		outSine				inOutSine
+	
+	(Transient)
+		bounce			bell			pop				pulse
+		tap				tri				spike			inverse		impulse[amt]
+		popElastic[damping_factor][oscillation_speed]	tapElastic[damping_factor][oscillation_speed]
+		pulseElastic[damping_factor][oscillation_speed]	kick(amt)	square
+	]]
+	
+	
+	-- alias (name [, effect])
+	-- Adds a new ease variable. Takes in the name of the ease variable, and an optional function.
+	-- example, alias('blacksphere')
+	
+	
+	-- spellcard {beat, length, color = {r, g, b, a}, name = name, difficulty = diffnum [, mode = 'end']}
+	-- let's you add spellcards to a chart.
+	-- `color`, `name`, and `difficulty` are all optional.
+	
+end)"
+	Type = "ActorFrame"
+><children>
+
+<Layer File="chart2lua" />
+
+</children></Mods>
