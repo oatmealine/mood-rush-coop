@@ -13,8 +13,24 @@
 		return false
 	end
 
+	function reverseRotation(angleX, angleY, angleZ)
+		local DEG_TO_RAD = math.pi / 180
+		angleX, angleY, angleZ = DEG_TO_RAD * angleX, DEG_TO_RAD * angleY, DEG_TO_RAD * angleZ
+		local sinX = math.sin(angleX);
+		local cosX = math.cos(angleX);
+		local sinY = math.sin(angleY);
+		local cosY = math.cos(angleY);
+		local sinZ = math.sin(angleZ);
+		local cosZ = math.cos(angleZ);
+		return 100 * math.atan2(-cosX*sinY*sinZ-sinX*cosZ,cosX*cosY), 100 * math.asin(-cosX*sinY*cosZ+sinX*sinZ), 100 * math.atan2(-sinX*sinY*cosZ-cosX*sinZ,cosY*cosZ)
+	end
+
 	local function confOff(deg)
 		return math.rad(deg) * 100
+	end
+
+	local function mix(a, b, x)
+		return a * (1 - x) + b * x
 	end
 
 	local randomVert = oat_randomvert:GetShader()
@@ -96,7 +112,18 @@
 
 	ease {204, 211-204, inOutSine, 100, 'reverse', -50, 'flip', 150, 'tipsy', plr = 1}
 
-	ease {211, 236-211, linear, 360 * 3, 'rotationx', confOff(-360 * 3), 'confusionxoffset', 360 * 1, 'rotationy', confOff(-360 * 1), 'confusionyoffset', plr = 1}
+	func {211, 236-211, function(beat, poptions)
+		local prog = (beat - 211) / (236 - 211)
+		local anglex = mix(0, 360 * 3, prog)
+		local angley = mix(360 * 3, 360 * 1, prog)
+
+		local nx, ny, nz = reverseRotation(anglex, angley, 0)
+
+		poptions[1].confusionxoffset = nx
+		poptions[1].confusionyoffset = ny
+	end}
+
+	ease {211, 236-211, linear, 360 * 3, 'rotationx', 360 * 1, 'rotationy', plr = 1}
 	ease {236, 4, outSine, 0, 'rotationx', 0, 'confusionxoffset'}
 
 	ease {240, 3, inSine, 0, 'stealth', 0, 'flip', 0, 'drunky', 0, 'tipsy', 0, 'drunk', 0, 'drunkz', 0, 'bumpyx', 0, 'dark', 0, 'boomerang', 100, 'zoom', 0, 'hidenoteflashes', plr = 2}
