@@ -2,6 +2,7 @@
 	-- wenis times (setup)
 
 	oat_randomvert:hidden(1)
+	oat_postsprite:SetTexture(oat_postaft:GetTexture())
 	
 	-- util funcs
 	function table.contains(table, element)
@@ -13,7 +14,7 @@
 		return false
 	end
 
-	function reverseRotation(angleX, angleY, angleZ)
+	local function reverseRotation(angleX, angleY, angleZ)
 		local DEG_TO_RAD = math.pi / 180
 		angleX, angleY, angleZ = DEG_TO_RAD * angleX, DEG_TO_RAD * angleY, DEG_TO_RAD * angleZ
 		local sinX = math.sin(angleX);
@@ -53,6 +54,10 @@
 	end
 
 	local slump = GAMESTATE:GetCurrentSteps(0):GetDifficulty() == 5
+
+	local function wrap(a)
+		return function() end
+	end
 
 	-- eases
 	local function onoff(x)
@@ -100,11 +105,13 @@
 		randomVert:uniform1f('stealth', a)
 	end}
 
+	alias {'glitch2', function(a)
+		oat_postsprite:GetShader():uniform1f('amount', a)
+	end}
+
 	-- The Real wenis times
 
-	ease {176, 3, createReverse(outCirc), 20, 'fuckarrow', 1, 'stealth2'}
-
-	set {180, 90, 'fuckarrow', 90, 'arrowfuck'}
+	func {179, wrap(enableRandVert({1}))}
 
 	ease {179, 1, outCirc, 90, 'stealth', -60, 'flip', 200, 'drunky', 400, 'tipsy', 700, 'drunk', 500, 'drunkz', 500, 'bumpyx', 100, 'dark', 100, 'boomerang', -100, 'zoom', 100, 'hidenoteflashes', plr = 2}
 	ease {179, 1, outCirc, 50, 'tipsy', -10, 'flip', plr = 1}
@@ -128,6 +135,12 @@
 
 	ease {240, 3, inSine, 0, 'stealth', 0, 'flip', 0, 'drunky', 0, 'tipsy', 0, 'drunk', 0, 'drunkz', 0, 'bumpyx', 0, 'dark', 0, 'boomerang', 100, 'zoom', 0, 'hidenoteflashes', plr = 2}
 	ease {240, 3, inSine, 0, 'rotationy', 0, 'confusionyoffset', 0, 'flip', 0, 'reverse', 0, 'tipsy', plr = 1}
+
+	for i,b in ipairs(funihold) do
+		local xory = ((i % 2) == 0) and 'x' or 'y'
+
+		ease {b[1], 1 + (b[2] or 0) * 0.8, createReverse(outCirc), 0.5, 'glitch2', 0.4, 'arrowfuck', 0.4, 'fuckarrow', -170, 'tiny' .. xory, 160, 'tipsy'}
+	end
 end)"
 	Type = "ActorFrame"
 ><children>
@@ -137,5 +150,19 @@ end)"
 
 	<!-- notedata -->
 	<CODE File="funihold.xml"/>
+
+	<!-- post-proc -->
+
+	<Layer 
+		Type = "ActorFrameTexture" 
+		InitCommand = "%xero.aft" 
+		Name = "oat_postaft" 
+	/>
+	<Layer 
+		Type = "Sprite"
+		Frag = "shaders/glitch2.frag"
+		InitCommand = "%xero.sprite" 
+		Name = "oat_postsprite" 
+	/>
 
 </children></Mods>
