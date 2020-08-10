@@ -104,11 +104,23 @@
 		add{beat, 0, instant, (sw/4)/8, 'moveVal', -50/9, 'flip', -100/9, 'centered', 100/9, 'movex0', -100/9, 'movey1', 100/9, 'movey2', -100/9, 'movex3', -100/9, 'reverse2', .5/9, 'xmod'}
 	end
 	
-	local fuck_apppr = {{2, 4}, {34, 36}}
+	for beat=102,115,.25 do
+		m_ea{beat, .125, square, 100, 'dark'}
+	end
 	
-	for i,v in pairs(fuck_apppr) do
+	local fuck_appr = {{2, 4}, {34, 36}}
+	
+	for i,v in pairs(fuck_appr) do
 		for beat=v[1],v[2],.25 do
 			m_ea{beat, .125, square, 0, 'stealth', 0, 'dark'}
+		end
+	end
+	
+	local fuck_appr2 = {{116, 123}, {124, 131}, {132, 138}, {148, 162}, {163, 172}}
+	
+	for i,v in pairs(fuck_appr2) do
+		for beat=v[1],v[2],.25 do
+			m_ea{beat, .145, square, 100, 'hide'}
 		end
 	end
 	
