@@ -73,11 +73,11 @@
 	-- custom modd de
 
 	alias {'arrowfuck', function(a)
-		randomVert:uniform1f('amp', a)
+		randomVert:uniform1f('ampA', a)
 	end}
 
 	alias {'fuckarrow', function(a)
-		randomVert:uniform1f('amp', a)
+		randomVert:uniform1f('ampB', a)
 	end}
 
 	alias {'stealth2', function(a)
@@ -86,18 +86,27 @@
 
 	-- The Real wenis times
 
-	func {174, function() enableRandVert({2}) end}
-
 	ease {176, 3, createReverse(outCirc), 20, 'fuckarrow', 1, 'stealth2'}
 
 	set {180, 90, 'fuckarrow', 90, 'arrowfuck'}
 
+	ease {179, 1, outCirc, 90, 'stealth', -60, 'flip', 200, 'drunky', 400, 'tipsy', 700, 'drunk', 500, 'drunkz', 500, 'bumpyx', 100, 'dark', 100, 'boomerang', -100, 'zoom', 100, 'hidenoteflashes', plr = 2}
+	ease {179, 1, outCirc, 50, 'tipsy', -10, 'flip', plr = 1}
+	ease {180, 208-180, linear, 360 * 3, 'rotationy', confOff(-360 * 3), 'confusionyoffset', plr = 1}
+
+	ease {204, 211-204, inOutSine, 100, 'reverse', -50, 'flip', 150, 'tipsy', plr = 1}
+
+	ease {211, 236-211, linear, 360 * 3, 'rotationx', confOff(-360 * 3), 'confusionxoffset', 360 * 1, 'rotationy', confOff(-360 * 1), 'confusionyoffset', plr = 1}
+	ease {236, 4, outSine, 0, 'rotationx', 0, 'confusionxoffset'}
+
+	ease {240, 3, inSine, 0, 'stealth', 0, 'flip', 0, 'drunky', 0, 'tipsy', 0, 'drunk', 0, 'drunkz', 0, 'bumpyx', 0, 'dark', 0, 'boomerang', 100, 'zoom', 0, 'hidenoteflashes', plr = 2}
+	ease {240, 3, inSine, 0, 'rotationy', 0, 'confusionyoffset', 0, 'flip', 0, 'reverse', 0, 'tipsy', plr = 1}
 end)"
 	Type = "ActorFrame"
 ><children>
 
 	<!-- sprites only made for shaders -->
-	<Layer Type="Sprite" Texture="white" Vert="shaders/truerandom.vert" Name="oat_randomvert"/>
+	<Layer Type="Sprite" Texture="white" Vert="shaders/random.vert" Name="oat_randomvert"/>
 
 	<!-- notedata -->
 	<CODE File="funihold.xml"/>
