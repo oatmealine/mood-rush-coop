@@ -182,21 +182,6 @@
 	        P[pn]:vibrate()
 	    end
 	end}
-	{276, function(beat)
-		if P[1] then
-			P[1]:pulse()
-			P[1]:effectmagnitude(0, 1.5, 0)
-			P[1]:effectclock('bgm')
-			P[1]:effectperiod(1)
-		end
-		
-		if P[2] then
-			P[2]:pulse()
-			P[2]:effectmagnitude(0, 1.5, 0)
-			P[2]:effectclock('bgm')
-			P[2]:effectperiod(1)
-		end
-	end}
 	
 	
 	-- alias (name [, effect])
