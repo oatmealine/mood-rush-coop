@@ -1,0 +1,9 @@
+<CODE Type="Quad" OnCommand="hidden,1"
+InitCommand="%function(self)
+fuck_p3 = {
+	{404.000,0,1},
+	{404.000,1,1},
+	{404.000,2,1},
+	{404.000,3,1},
+}
+end"/>
