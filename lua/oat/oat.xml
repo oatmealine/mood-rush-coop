@@ -109,8 +109,6 @@
 		return a * (1 - x) + b * x
 	end
 
-	local randomVert = oat_randomvert:GetShader()
-
 	local function enableVert(shader, players)
 		players = players or {1, 2, 3, 4}
 
@@ -124,8 +122,16 @@
 		enableVert('nothing') -- no other way ..... ha ha
 	end
 
+	local randomVert = oat_randomvert:GetShader()
+
 	local function enableRandVert(players)
 		enableVert(randomVert, players)
+	end
+
+	local playstationVert = oat_playstationvert:GetShader()
+
+	local function enablePlaystationVert(players)
+		enableVert(playstationVert, players)
 	end
 
 	local slump = GAMESTATE:GetCurrentSteps(0):GetDifficulty() == 5
@@ -174,6 +180,10 @@
 
 	alias {'fuckarrow', function(a)
 		randomVert:uniform1f('ampB', a)
+	end}
+
+	alias {'playstation', function(a)
+		playstationVert:uniform1f('rounding', a)
 	end}
 
 	alias {'stealth2', function(a)
@@ -310,7 +320,7 @@
 				prox:x(proxPos[i] + a * proxDist * 2 * off)
 			end
 		end}
-		ease {b[1], 1, createReverse(outCirc), 120, 'bumpy', 150, 'bumpyx', 0.3, 'arrowfuck', 0.3, 'fuckarrow', 0.7, 'glitch2', 1, function(a)
+		ease {b[1], 1, createReverse(outCirc), 120, 'bumpy', 150, 'bumpyx', 2, 'playstation', -30, 'tiny', 0.5, 'glitch2', 1, function(a)
 			local stren = 5
 			local rotstren = 20
 
@@ -329,10 +339,11 @@
 		end}
 	end
 
-	func {276, wrap(enableRandVert({1, 2}))}
+	-- func {276, wrap(enablePlaystationVert({1, 2}))}
+	func {308, wrap(enableRandVert({1, 2}))}
 
 	for _,b in ipairs(onlykicks) do
-		ease {b[1], 1, createReverse(outCirc), 10, 'bumpyx', 0.03, 'arrowfuck', 0.03, 'fuckarrow', 1.2, 'glitch2', 1, function(a)
+		ease {b[1], 1, createReverse(outCirc), 10, 'bumpyx', 0.03, 'arrowfuck', 0.03, 'fuckarrow', 1.2, 'glitch2', -30, 'tiny', 1, function(a)
 			local stren = 10
 			local rotstren = 90
 			
@@ -400,13 +411,25 @@
 	ease {307.5 - 0.5, 0.5 * 2, inOutCirc, 0, 'tipsy'}
 
 	for b = 308, 332 - 1/3, 1/3 do
-		ease {b, 1/3, outSine, 0.9, function(a)
-			for _,v in ipairs(oat_partsaftsprite) do
-				v:diffusealpha(1 - a)
-			end
-			oat_partsaftspritebehind:diffusealpha(1 - a)
-		end}
+		local blacklist = {315, 324}
+		if not table.contains(blacklist, math.floor(b)) then
+			ease {b, 1/3, outSine, 0.9, function(a)
+				for _,v in ipairs(oat_partsaftsprite) do
+					v:diffusealpha(1 - a)
+				end
+				oat_partsaftspritebehind:diffusealpha(1 - a)
+			end}
+		else
+			ease {b, 1, onoff, 1, function()
+				for _,v in ipairs(oat_partsaftsprite) do
+					v:diffusealpha(1)
+				end
+				oat_partsaftspritebehind:diffusealpha(0)
+			end}
+		end
 	end
+
+	
 	for i,v in ipairs(invertkicks) do
 		local b = v[1]
 
@@ -429,6 +452,14 @@
 	end}
 
 	set {332, 0, 'invert'}
+
+
+	ease {315, 1, createTemp(inSine), 1, function(a)
+		for _,v in ipairs(oat_partsaftsprite) do
+			v:zoom(1 - a)
+		end
+	end}
+	ease {324, 1, onoff, -1000, 'tiny'}
 
 	func {307, 332-307, function(beat, poptions)
 		local rot = 60 * outCirc(math.min(beat - 307, 1))
@@ -463,6 +494,7 @@ end)"
 ><children>
 	<!-- sprites only made for shaders -->
 	<Layer Type="Sprite" Texture="white" Vert="shaders/random.vert" Name="oat_randomvert"/>
+	<Layer Type="Sprite" Texture="white" Vert="shaders/playstation.vert" Name="oat_playstationvert"/>
 
 	<!-- notedata -->
 	<CODE File="funihold.xml"/>
