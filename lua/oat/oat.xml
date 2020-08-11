@@ -141,6 +141,21 @@
 
 		ease {b[1], 1 + (b[2] or 0) * 0.8, createReverse(outCirc), 0.5, 'glitch2', 0.4, 'arrowfuck', 0.4, 'fuckarrow', -170, 'tiny' .. xory, 160, 'tipsy'}
 	end
+
+	ease {244 - 2/3, 2/3 * 2, inOutCirc, 200, 'tipsy'}
+	ease {244, 2/3 * 2, inOutCirc, -200, 'tipsy'}
+	ease {245.5 - 0.5, 0.5 * 2, inOutCirc, 150, 'tipsy', 10, 'rotationz'}
+	ease {246 - 0.5, 0.5 * 2, inOutCirc, -200, 'tipsy', -5, 'rotationz'}
+	ease {246.5 - 0.5, 0.5 * 2, inOutCirc, 200, 'tipsy', 0, 'rotationz'}
+	ease {247.5 - 0.5, 0.5 * 2, inOutCirc, -200, 'tipsy', 100, 'reverse'}
+	ease {248 - 0.5, 0.5 * 2, inOutCirc, 150, 'tipsy', 0, 'reverse'}
+	ease {247.5, 0.5, createReverse(outCirc), -50, 'tinyx'}
+	ease {248, 0.5, createReverse(outCirc), -50, 'tinyy'}
+	ease {248.5 - 2/3, 2/3 * 2, inOutCirc, -200, 'tipsy', -20, 'rotationz'}
+	ease {249.167 - 2/3, 2/3 * 2, inOutCirc, 150, 'tipsy', 15, 'rotationz'}
+	ease {249.833 - 0.5, 0.5 * 2, inOutCirc, -200, 'tipsy', -5, 'rotationz'}
+	ease {250.75 - 0.5, 0.5 * 2, inOutCirc, 0, 'tipsy', 10, 'rotationz', 100, 'reverse'}
+	ease {252 - 0.5, 0.5 * 2, inOutCirc, 0, 'rotationz'}
 end)"
 	Type = "ActorFrame"
 ><children>
