@@ -310,7 +310,7 @@
 				prox:x(proxPos[i] + a * proxDist * 2 * off)
 			end
 		end}
-		ease {b[1], 1, createReverse(outCirc), 120, 'bumpy', 150, 'bumpyx', 0.7, 'glitch2', 1, function(a)
+		ease {b[1], 1, createReverse(outCirc), 120, 'bumpy', 150, 'bumpyx', 0.3, 'arrowfuck', 0.3, 'fuckarrow', 0.7, 'glitch2', 1, function(a)
 			local stren = 5
 			local rotstren = 20
 
@@ -328,8 +328,11 @@
 			end
 		end}
 	end
+
+	func {276, wrap(enableRandVert({1, 2}))}
+
 	for _,b in ipairs(onlykicks) do
-		ease {b[1], 1, createReverse(outCirc), 10, 'bumpyx', 1.2, 'glitch2', 1, function(a)
+		ease {b[1], 1, createReverse(outCirc), 10, 'bumpyx', 0.03, 'arrowfuck', 0.03, 'fuckarrow', 1.2, 'glitch2', 1, function(a)
 			local stren = 10
 			local rotstren = 90
 			
@@ -446,6 +449,8 @@
 	ease {337.5, 1, inOutCirc, 50, 'rotationx', confOff(-50), 'confusionxoffset'}
 	ease {338.5, 1, inOutCirc, -60, 'rotationx', confOff(60), 'confusionxoffset'}
 	ease {339.5, 1, inOutCirc, 0, 'rotationx', 0, 'confusionxoffset'}
+
+	func {340, disableVert}
 
 	spellcard {176, 212, color = {.2, 0, .7, 1}, name = 'glitch2.frag and RotationY in The Adventure For Readability'}
 	spellcard {212, 240, color = {.1, 0, .9, 1}, name = 'RotationY\'s unwanted twin brother'}
