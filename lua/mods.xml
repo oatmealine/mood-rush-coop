@@ -115,12 +115,6 @@ Type = "ActorFrame"
 	/>
 
 	<!-- post-proc -->
-
-	<Layer 
-		Type = "ActorFrameTexture" 
-		InitCommand = "%xero.aft" 
-		Name = "oat_postaft" 
-	/>
 	<Layer 
 		Type = "Sprite"
 		Frag = "shaders/glitch2.frag"
@@ -129,6 +123,8 @@ Type = "ActorFrame"
 	/>
 
 	<!-- funny finorza shards --->
+	<Layer Type = "ActorFrameTexture" InitCommand = "%xero.aft" Name = "oat_postaft" />
+
 	<Layer Type="Sprite" InitCommand = "%xero.sprite" Name = "oat_partsaftspritebehind" />
 
 	<Layer Type="Sprite" InitCommand = "%xero.sprite" Name = "oat_partsaftsprite[1]" />

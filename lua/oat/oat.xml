@@ -15,7 +15,7 @@
 	end
 
 	oat_randomvert:hidden(1)
-	oat_postsprite:SetTexture(oat_postaft:GetTexture())
+	oat_postsprite:SetTexture(fuck_aft:GetTexture())
 	
 	function modulo(a, b)
 		return a - math.floor(a/b)*b;
