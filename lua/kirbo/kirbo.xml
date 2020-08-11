@@ -262,38 +262,4 @@ end)"
 
 <Layer File="chart2lua" />
 
-<Layer 
-	Type = "ActorFrameTexture" 
-	InitCommand = "%xero.aft" 
-	Name = "fuck_aft" 
-/>
-
-<Layer 
-	Type = "Sprite"
-	Frag = "Shaders/fisheye.frag"
-	InitCommand = "%xero.sprite" 
-	Name = "fuck_fisheye" 
-	OnCommand="%function(self) 
-		xero()
-		self:SetTexture(fuck_aft:GetTexture())
-		self:diffusealpha(0)
-	end"
-	HideEyeMessageCommand="diffusealpha,0"
-	ShowEyeMessageCommand="diffusealpha,1"
-/>
-
-<Layer 
-	Type = "Sprite"
-	Frag = "Shaders/post.frag"
-	InitCommand = "%xero.sprite" 
-	Name = "fuck_post" 
-	OnCommand="%function(self) 
-		xero()
-		self:SetTexture(fuck_aft:GetTexture())
-		self:diffusealpha(0)
-	end"
-	HidePostMessageCommand="diffusealpha,0"
-	ShowPostMessageCommand="diffusealpha,1"
-/>
-
 </children></Mods>

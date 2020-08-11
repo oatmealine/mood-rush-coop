@@ -1,5 +1,13 @@
 <Mods LoadCommand="%xero(function(self)
 	-- wenis times (setup)
+	for i,aft in ipairs(oat_screenplayeraftsprite) do
+		aft:SetTexture(oat_screenplayeraft:GetTexture())
+		aft:diffusealpha(0)
+		aft:croptop(0.01)
+		aft:cropright(0.01)
+		aft:cropleft(0.01)
+		aft:cropbottom(0.01)
+	end
 
 	oat_randomvert:hidden(1)
 	oat_postsprite:SetTexture(oat_postaft:GetTexture())
@@ -159,25 +167,10 @@
 end)"
 	Type = "ActorFrame"
 ><children>
-
 	<!-- sprites only made for shaders -->
 	<Layer Type="Sprite" Texture="white" Vert="shaders/random.vert" Name="oat_randomvert"/>
 
 	<!-- notedata -->
 	<CODE File="funihold.xml"/>
-
-	<!-- post-proc -->
-
-	<Layer 
-		Type = "ActorFrameTexture" 
-		InitCommand = "%xero.aft" 
-		Name = "oat_postaft" 
-	/>
-	<Layer 
-		Type = "Sprite"
-		Frag = "shaders/glitch2.frag"
-		InitCommand = "%xero.sprite" 
-		Name = "oat_postsprite" 
-	/>
-
+	<CODE File="jump.xml"/>
 </children></Mods>

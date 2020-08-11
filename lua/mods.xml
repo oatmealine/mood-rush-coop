@@ -5,12 +5,15 @@
 	self:fov(45)
 	for pn = 1, 2 do
 		function temp(proxy, child)
+			if not child or not proxy then return end
+
 			child:hidden(1)
 			child:sleep(9e9)
 			proxy:SetTarget(child)
-			proxy:xy(scx * (pn - 0.5), scy)
+			proxy:xy(sw/4*((pn-1)*2+1), scy)
 		end
 		temp(proxy.notefield[pn], P[pn]:GetChild'NoteField')
+		temp(proxy2.notefield[pn], P[pn]:GetChild'NoteField')
 		temp(proxy.judge[pn], P[pn]:GetChild'Judgment')
 		temp(proxy.combo[pn], P[pn]:GetChild'Combo')
 		
@@ -22,6 +25,7 @@
 		pj:basezoomx(0.75)
 		pj:basezoomy(0.75)
 		pj:y(SCREEN_HEIGHT*0.5)
+
 	end
 	
 	set{0, 1.85, 'xmod', 100, 'dizzyholds', 100, 'stealthpastreceptors', 100, 'cover'}
@@ -31,11 +35,88 @@ end)"
 Type = "ActorFrame"
 ><children>
 	
-	<Layer Type = "ActorFrame" Name = "fuck_notefield" FOV="45" ><children>
-		<Layer Type = "ActorProxy" Name = "proxy.notefield[1]" />
-		<Layer Type = "ActorProxy" Name = "proxy.notefield[2]" />
+	<!-- player echo chamber -->
+	<Layer File="white" InitCommand="%function(self)
+		self:xy(SCREEN_CENTER_X, SCREEN_CENTER_Y)
+		self:zoomto(SCREEN_WIDTH, SCREEN_HEIGHT)
+	end"/>
+
+	<Layer Type = "ActorFrame" FOV="45" ><children>
+		<Layer Type = "ActorProxy" Name = "proxy2.notefield[1]" />
+		<Layer Type = "ActorProxy" Name = "proxy2.notefield[2]" />
 	</children></Layer>
+
+	<Layer Type="ActorFrameTexture" InitCommand = "%xero.aft" Name = "oat_screenplayeraft" />
 	
+	<Layer File="white" InitCommand="%function(self)
+		self:xy(SCREEN_CENTER_X, SCREEN_CENTER_Y)
+		self:zoomto(SCREEN_WIDTH, SCREEN_HEIGHT)
+	end"/>
+
+
+	<Layer Type = "ActorProxy" Name = "proxy.notefield[1]" />
+	<Layer Type = "ActorProxy" Name = "proxy.notefield[2]" />
+
+	<!-- players go wee -->
+	<Layer Type="Sprite" Frag="shaders/lumikey.frag" InitCommand = "%xero.sprite" Name = "oat_screenplayeraftsprite[1]" />
+	<Layer Type="Sprite" Frag="shaders/lumikey.frag" InitCommand = "%xero.sprite" Name = "oat_screenplayeraftsprite[2]" />
+	<Layer Type="Sprite" Frag="shaders/lumikey.frag" InitCommand = "%xero.sprite" Name = "oat_screenplayeraftsprite[3]" />
+	<Layer Type="Sprite" Frag="shaders/lumikey.frag" InitCommand = "%xero.sprite" Name = "oat_screenplayeraftsprite[4]" />
+	<Layer Type="Sprite" Frag="shaders/lumikey.frag" InitCommand = "%xero.sprite" Name = "oat_screenplayeraftsprite[5]" />
+	<Layer Type="Sprite" Frag="shaders/lumikey.frag" InitCommand = "%xero.sprite" Name = "oat_screenplayeraftsprite[6]" />
+	<Layer Type="Sprite" Frag="shaders/lumikey.frag" InitCommand = "%xero.sprite" Name = "oat_screenplayeraftsprite[7]" />
+	<Layer Type="Sprite" Frag="shaders/lumikey.frag" InitCommand = "%xero.sprite" Name = "oat_screenplayeraftsprite[8]" />
+	<Layer Type="Sprite" Frag="shaders/lumikey.frag" InitCommand = "%xero.sprite" Name = "oat_screenplayeraftsprite[9]" />
+	<Layer Type="Sprite" Frag="shaders/lumikey.frag" InitCommand = "%xero.sprite" Name = "oat_screenplayeraftsprite[10]" />
+
+	<Layer 
+		Type = "ActorFrameTexture" 
+		InitCommand = "%xero.aft" 
+		Name = "fuck_aft" 
+	/>
+
+	<Layer 
+		Type = "Sprite"
+		Frag = "shaders/fisheye.frag"
+		InitCommand = "%xero.sprite" 
+		Name = "fuck_fisheye" 
+		OnCommand="%function(self) 
+			xero()
+			self:SetTexture(fuck_aft:GetTexture())
+			self:diffusealpha(0)
+		end"
+		HideEyeMessageCommand="diffusealpha,0"
+		ShowEyeMessageCommand="diffusealpha,1"
+	/>
+
+	<Layer 
+		Type = "Sprite"
+		Frag = "shaders/post.frag"
+		InitCommand = "%xero.sprite" 
+		Name = "fuck_post" 
+		OnCommand="%function(self) 
+			xero()
+			self:SetTexture(fuck_aft:GetTexture())
+			self:diffusealpha(0)
+		end"
+		HidePostMessageCommand="diffusealpha,0"
+		ShowPostMessageCommand="diffusealpha,1"
+	/>
+
+	<!-- post-proc -->
+
+	<Layer 
+		Type = "ActorFrameTexture" 
+		InitCommand = "%xero.aft" 
+		Name = "oat_postaft" 
+	/>
+	<Layer 
+		Type = "Sprite"
+		Frag = "shaders/glitch2.frag"
+		InitCommand = "%xero.sprite" 
+		Name = "oat_postsprite" 
+	/>
+
 	<Layer File = "oat/oat.xml" />
 	<Layer File = "kirbo/kirbo.xml" />
 
