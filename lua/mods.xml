@@ -5,12 +5,12 @@
 	self:fov(45)
 	for pn = 1, 2 do
 		function temp(proxy, child)
-			-- child:hidden(1)
+			child:hidden(0)
 			child:sleep(9e9)
 			proxy:SetTarget(child)
 			proxy:xy(scx * (pn - 0.5), scy)
 		end
-		-- temp(proxy.notefield[pn], P[pn]:GetChild'NoteField')
+		temp(proxy.notefield[pn], P[pn]:GetChild'NoteField')
 		temp(proxy.judge[pn], P[pn]:GetChild'Judgment')
 		temp(proxy.combo[pn], P[pn]:GetChild'Combo')
 		

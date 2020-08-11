@@ -120,7 +120,7 @@
 	--7, 'xmod', 130, 'mini', -80, 'rotationx', 140, 'confusionxoffset',
 	
 	for beat=370,372,.125 do
-		add{beat, 0, instant, 50/17, 'flip', 100/17, 'centered', -100/17, 'movex0', 100/17, 'movey1', -100/17, 'movey2', 100/17, 'movex3', 100/17, 'reverse2', 600/17, 'dpad_setup', 7/17, 'xmod', 130/17, 'mini', -80/17, 'rotationx', 140/17, 'confusionxoffset'}
+		add{beat, 0, instant, 7/17, 'xmod', 130/17, 'mini', -80/17, 'rotationx', 140/17, 'confusionxoffset'}
 		-- print(beat)
 	end
 	
@@ -164,6 +164,11 @@
 			P[pn]:GetChild('Combo'):hidden(1)
 	    end
 		
+		for pn = 1, 2 do
+			proxy.notefield[pn]:hidden(1)
+			proxy.notefield[pn]:x(P[pn]:GetX())
+		end
+		
 		MESSAGEMAN:Broadcast('ShowEye')
 	end}
 	{4, 28, function(beat, mods)	
@@ -200,6 +205,25 @@
 		for pn = 1, max_pn do
 	        P[pn]:vibrate()
 	    end
+	end}
+	-- for oat
+	{252, function(beat)
+		for pn = 1, max_pn do
+	        P[pn]:hidden(1)
+	    end
+		
+		for pn = 1, 2 do
+			proxy.notefield[pn]:hidden(0)
+		end
+	end}
+	{372, function(beat)
+		for pn = 1, max_pn do
+	        P[pn]:hidden(0)
+	    end
+		
+		for pn = 1, 2 do
+			proxy.notefield[pn]:hidden(1)
+		end
 	end}
 	
 	
