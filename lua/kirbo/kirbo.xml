@@ -303,6 +303,7 @@
 	spellcard{0, 28, color = {.5, 0, 0, 1}, name = 'did anyone order a d-pad?'}
 	spellcard{100, 176, color = {.75, 0, 0, 1}, name = 'sike, have another d-pad', mode = 'end'}
 	spellcard{372, 400, color = {1, 0, 0, 1}, name = 'd-pad, electric tripleloo', mode = 'end'}
+	spellcard{402, 404, color = {0, 0, 1, 1}, name = 'yeah, hit that quad, its good', mode = 'end'}
 	
 	
 end)"
