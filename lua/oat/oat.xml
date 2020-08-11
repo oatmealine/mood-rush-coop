@@ -196,6 +196,7 @@
 
 	-- The Real wenis times
 
+	func {178, disableVert}
 	func {179, wrap(enableRandVert({1}))}
 
 	func {180, function()
@@ -207,7 +208,7 @@
 
 	ease {179, 1, outCirc, 90, 'stealth', -60, 'flip', 200, 'drunky', 400, 'tipsy', 700, 'drunk', 500, 'drunkz', 500, 'bumpyx', 100, 'dark', 100, 'boomerang', -100, 'zoom', 100, 'hidenoteflashes', plr = 2}
 	ease {179, 1, outCirc, 50, 'tipsy', -10, 'flip', plr = 1}
-	ease {180, 208-180, linear, 360 * 3, 'rotationy', confOff(-360 * 3), 'confusionyoffset', plr = 1}
+	ease {180, 208-180, linear, 360 * 3, 'rotationy', confOff(-360 * 3), 'confusionyoffset', 2000, 'tanbumpyoffsetx', 1000, 'tanbumpyoffset', plr = 1}
 
 	ease {204, 211-204, inOutSine, 100, 'reverse', -50, 'flip', 150, 'tipsy', plr = 1}
 
@@ -231,7 +232,7 @@
 	for i,b in ipairs(funihold) do
 		local xory = ((i % 2) == 0) and 'x' or 'y'
 
-		ease {b[1], 1 + (b[2] or 0) * 0.8, createReverse(outCirc), 0.5, 'glitch2', 0.4, 'arrowfuck', 0.4, 'fuckarrow', -170, 'tiny' .. xory, 160, 'tipsy'}
+		ease {b[1], 1 + (b[2] or 0) * 0.8, createReverse(outCirc), 0.5, 'glitch2', 20, 'tanbumpyx', 30, 'tanbumpy', 0.4, 'arrowfuck', 0.4, 'fuckarrow', -170, 'tiny' .. xory, 160, 'tipsy', plr = 1}
 	end
 
 	ease {244 - 2/3, 2/3 * 2, inOutCirc, 200, 'tipsy'}
