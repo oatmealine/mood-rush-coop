@@ -17,6 +17,44 @@
 	oat_randomvert:hidden(1)
 	oat_postsprite:SetTexture(oat_postaft:GetTexture())
 	
+	function modulo(a, b)
+		return a - math.floor(a/b)*b;
+	end
+
+	local origPos = {}
+	
+	oat_partsaftspritebehind:SetTexture(oat_postaft:GetTexture())
+	oat_partsaftspritebehind:diffuse(0.9, 0, 0, 1)
+
+	for i,v in ipairs(oat_partsaftsprite) do
+		v:xy(scx, scy)
+		--v:zoomto(sw, sh)
+	  v:SetTexture(oat_postaft:GetTexture())
+
+		local ni = i-1
+		local vni = math.floor(ni/24)
+
+		local inv = 1/12
+		local vinv = (1/12) * (4/3)
+
+		local size = sw/12
+
+		local roffset = math.floor(ni/12)%2
+
+		v:cropleft( modulo(inv*ni, 1) )
+		v:cropright( modulo((1 - inv) - inv*ni,1) )
+
+		v:cropbottom(vinv*vni)
+		v:croptop((1 - vinv) - vinv*vni)
+
+		v:halign(modulo(inv*ni + inv/2, 1))
+		v:valign( 1-modulo(vinv*vni + vinv/2, 1) )
+
+		origPos[i] = {size/2 + modulo(ni,12)*size + roffset*sw, size/2 + vni*size}
+		v:x( size/2 + modulo(ni,12)*size + roffset*sw )
+		v:y( size/2 + vni*size )
+	end
+
 	-- util funcs
 	function table.contains(table, element)
 		for _, value in pairs(table) do
@@ -232,6 +270,42 @@
 			aft:hidden(1)
 		end
 	end}
+
+	for _,b in ipairs(kick) do
+		ease {b[1], 1, createReverse(outCirc), 1, function(a)
+			for i,v in ipairs(oat_partsaftsprite) do
+				local stren = 4
+
+				v:x(origPos[i][1] + a * math.random(-sw/50, sw/20) * stren)
+				v:y(origPos[i][2] + a * math.random(-sh/40, sh/40) * stren)
+
+				--math.randomseed(aftNumRaw + i)
+				local rotstren = 20
+				v:rotationx(math.random(-rotstren, rotstren) * a)
+				v:rotationy(math.random(-rotstren, rotstren) * a)
+				v:rotationz(math.random(-rotstren, rotstren) * a)
+			end
+		end}
+	end
+	for _,b in ipairs(onlykicks) do
+		ease {b[1], 1, createReverse(outCirc), 1, function(a)
+			local stren = 8
+			local rotstren = 80
+			
+			oat_partsaftspritebehind:x(scx + a * math.random(-sw/50, sh/50) * stren * 0.7)
+			oat_partsaftspritebehind:y(scy + a * math.random(-sh/40, sh/40) * stren * 0.7)
+
+			for i,v in ipairs(oat_partsaftsprite) do
+				v:x(origPos[i][1] + a * math.random(-sw/50, sw/50) * stren)
+				v:y(origPos[i][2] + a * math.random(-sh/40, sh/40) * stren)
+
+				--math.randomseed(aftNumRaw + i)
+				v:rotationx(math.random(-rotstren, rotstren) * a)
+				v:rotationy(math.random(-rotstren, rotstren) * a)
+				v:rotationz(math.random(-rotstren, rotstren) * a)
+			end
+		end}
+	end
 end)"
 	Type = "ActorFrame"
 ><children>
@@ -241,4 +315,6 @@ end)"
 	<!-- notedata -->
 	<CODE File="funihold.xml"/>
 	<CODE File="jump.xml"/>
+	<CODE File="kick.xml"/>
+	<CODE File="onlykicks.xml"/>
 </children></Mods>
