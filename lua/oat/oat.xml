@@ -16,6 +16,7 @@
 
 	oat_randomvert:hidden(1)
 	oat_postsprite:SetTexture(fuck_aft:GetTexture())
+	oat_postsprite:hidden(1)
 	
 	function modulo(a, b)
 		return a - math.floor(a/b)*b;
@@ -186,6 +187,13 @@
 	-- The Real wenis times
 
 	func {179, wrap(enableRandVert({1}))}
+
+	func {180, function()
+		oat_postsprite:hidden(0)
+	end}
+	func {340, function()
+		oat_postsprite:hidden(1)
+	end}
 
 	ease {179, 1, outCirc, 90, 'stealth', -60, 'flip', 200, 'drunky', 400, 'tipsy', 700, 'drunk', 500, 'drunkz', 500, 'bumpyx', 100, 'dark', 100, 'boomerang', -100, 'zoom', 100, 'hidenoteflashes', plr = 2}
 	ease {179, 1, outCirc, 50, 'tipsy', -10, 'flip', plr = 1}
