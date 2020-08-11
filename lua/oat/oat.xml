@@ -155,7 +155,7 @@
 	ease {249.167 - 2/3, 2/3 * 2, inOutCirc, 150, 'tipsy', 15, 'rotationz'}
 	ease {249.833 - 0.5, 0.5 * 2, inOutCirc, -200, 'tipsy', -5, 'rotationz'}
 	ease {250.75 - 0.5, 0.5 * 2, inOutCirc, 0, 'tipsy', 10, 'rotationz', 100, 'reverse'}
-	ease {252 - 0.5, 0.5 * 2, inOutCirc, 0, 'rotationz'}
+	ease {252 - 0.5, 0.5 * 2, inOutCirc, 0, 'rotationz', 0, 'reverse'}
 end)"
 	Type = "ActorFrame"
 ><children>
