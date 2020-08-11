@@ -38,7 +38,8 @@
 		pulseElastic[damping_factor][oscillation_speed]	kick(amt)	square
 	]]
 	
-	m_ea{0, 1, outExpo, 100, 'dark', 100, 'stealth', 100, 'halgun'}
+	m_ea{0, 0, instant, 100, 'stealth'}
+	{0, 1, outExpo, 100, 'dark', 100, 'halgun'}
 	{0, 1, kick(4), -500, 'tiny'}
 	
 	{2, 0, instant, 100, 'spiralholds', 700, 'zoomz'}
@@ -49,7 +50,7 @@
 	
 	{12, 8, outQuad, 100, 'zoom', 0, 'rotationx'}
 	
-	{20, 8, inQuad, -180*8, 'rotationz', -.85, 'nyoom', 75, 'mini', 100, 'longholds', 1337, 'zoomz'}
+	{20, 8, inQuart, -180*8, 'rotationz', -.85, 'nyoom', 75, 'mini', 100, 'longholds', 1337, 'zoomz'}
 	
 	{28, 1, outExpo, 100, 'stealth', 100, 'dark'}
 	{28, 1, kick(4), -500, 'tiny'}
@@ -65,7 +66,7 @@
 	{100, 10, outQuad, 50, 'flip', 100, 'centered', -300, 'movex0', 300, 'movey1', -300, 'movey2', 300, 'movex3', 100, 'spiralholds', 100, 'reverse1', 600, 'dpad_setup2', -50, 'drawsize', -100, 'drawsizeback'}
 	{100, 16, outQuad, 180*14, 'rotationz'}
 	
-	{110, 5, outQuad, 0, 'drunk', 0, 'tipsy', 0, 'dark', 0, 'stealth', 0, 'confusion', 1.35, 'xmod', 700, 'zoomz'}
+	{110, 5, outQuad, 0, 'drunk', 0, 'tipsy', 0, 'dark', 0, 'stealth', 0, 'confusion', 1.25, 'xmod', 700, 'zoomz'}
 	
 	{116, 0, instant, 0, 'rotationz'}
 	{116, 123, linear, -90*(123-116), 'rotationz', mode = 'end'}
@@ -107,7 +108,7 @@
 	wiggle0(116, 172-116, 16, inQuad, -15, 'zoom')
 	
 	for beat=2,4,.125 do
-		add{beat, 0, instant, 50/17, 'flip', 100/17, 'centered', -100/17, 'movex0', 100/17, 'movey1', -100/17, 'movey2', 100/17, 'movex3', 100/17, 'reverse2', 600/17, 'dpad_setup', -.5/17, 'xmod'}
+		add{beat, 0, instant, 50/17, 'flip', 100/17, 'centered', -100/17, 'movex0', 100/17, 'movey1', -100/17, 'movey2', 100/17, 'movex3', 100/17, 'reverse2', 600/17, 'dpad_setup', -.55/17, 'xmod'}
 		-- print(beat)
 	end
 	
