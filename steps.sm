@@ -6,25 +6,32 @@
 #ARTISTTRANSLIT:;
 #GENRE:;
 #CREDIT:;
-#MUSIC:Anderex & Expulze - Fuck With The Baddest.ogg;
 #BANNER:Banner.gif;
 #BACKGROUND:;
+#LYRICSPATH:;
 #CDTITLE:;
+#MUSIC:Anderex & Expulze - Fuck With The Baddest.ogg;
+#OFFSET:-0.178;
 #SAMPLESTART:103.678;
 #SAMPLELENGTH:12.375;
 #SELECTABLE:YES;
-#OFFSET:-0.178;
 #BPMS:0.000=160.000;
 #STOPS:;
 #BGCHANGES:;
-#FGCHANGES:0.000=template/main.xml=1.000=0=0=1;
-//--------------- dance-single - Kirby5464 + oatmealine ----------------
+
+//The majority of simfile scripts and visual effects are stored here.
+#FGCHANGES:0.000=template/main.xml=1.000=0=0=1=====,
+;
+
+#KEYSOUNDS:;
+
+//---------------dance-single - Kirby5464 + oatmealine----------------
 #NOTES:
      dance-single:
      Kirby5464 + oatmealine:
      Challenge:
      1:
-     0,0,0,0,0:
+     0.442,0.566,0.105,0.323,0.132:
 0000
 0000
 0000
@@ -843,3 +850,4 @@ MMMM
 0000
 0000
 ;
+
