@@ -1,40 +1,81 @@
-<Mods LoadCommand="%xero(function(self)
-	function nitg_send_spellcards(cards)
-		if table.getn(cards) == 0 or tonumber(GAMESTATE:GetVersionDate()) < 20170714 then return false end
-		
-		local s = GAMESTATE:GetCurrentSong()
-
-		s:SetNumSpellCards(table.getn(cards))
-		for i=1,table.getn(cards) do
-			local a = cards[i]
-
-			a[1] = a[1] or 0
-			a[2] = a[2] or 0
-			a[3] = a[3] or ''
-			a[4] = a[4] or 0
-			a[5] = a[5] or {1, 1, 1, 1}
-
-			s:SetSpellCardTiming(i-1,a[1], a[2])
-			s:SetSpellCardName(i-1,a[3])
-			s:SetSpellCardDifficulty(i-1,a[4])
-			s:SetSpellCardColor(i-1,a[5][1],a[5][2],a[5][3],a[5][4])
+<!--
+	<< spellcards.xml >>
+	
+	Lets you add spellcards to a chart.
+	
+	```lua
+	spellcard
+	{128, 32, color = {1, 0, 0, 1}, name = 'My Spellcard 1', difficulty = 3}
+	{20, 32, color = {1, 0, 0, 1}, name = 'My Spellcard 2', difficulty = 2}
+	```
+	
+	`color`, `name`, and `difficulty` are all optional. The length follows `set_timing_mode` conventions.
+	
+-->
+<Layer Type = "Quad" LoadCommand = "%xero(function(self)
+	local spellcards = {}
+	local n = 0
+	
+	local function throw(msg)
+		local _, err = pcall(error, msg, 4)
+		SCREENMAN:SystemMessage(err)
+	end
+	function spellcard(card)
+		if type(card) == 'table' then
+			
+			if type(card[1]) ~= 'number' then
+				throw ('invalid beat: \'' .. tostring(card[1]) .. '\'')
+				return
+			end
+			
+			if type(card[2]) ~= 'number' then
+				throw ('invalid ' .. get_timing_mode() .. ': \'' .. tostring(card[2]) .. '\'')
+				return
+			end
+			
+			card.color = card.color or {1, 0, 0, 1}
+			card.name = card.name or 'Unnamed Spellcard'
+			card.difficulty = card.difficulty or 0
+			
+			if type(card.color) ~= 'table' then
+				throw ('invalid spellcard color: Expected table, got '.. type(card.color))
+				return
+			end
+			
+			if type(card.difficulty) ~= 'number' then
+				throw ('invalid spellcard difficulty: Expected number, got '.. type(card.color))
+				return
+			end
+			
+			if type(card.name) ~= 'string' then
+				throw ('invalid spellcard name: Expected string, got '.. type(card.name))
+				return
+			end
+			
+			-- if (card.mode or get_timing_mode()) == 'len' then
+				-- card[2] = card[2] + card[1]
+			-- end
+			
+			spellcards[n] = card
+			n = n + 1
+			
+		else
+			throw '\'{\' expected near \'spellcard\''
 		end
 	end
-
-	function nitg_send_labels(labels)
-		if table.getn(labels) == 0 or tonumber(GAMESTATE:GetVersionDate()) < 20170714 then return false end
-		
-		local s = GAMESTATE:GetCurrentSong()
-		s:ClearLabels();
-		for i=1,table.getn(labels) do
-			s:AddLabel(labels[i][1],labels[i][2])
+	
+	func {0, function()
+		spellcard = function()
+			throw 'you\'ve done something wrong with spellcards'
 		end
-		
-	end
-
-	--start,end,name,difficulty,color
-	prefix_spellcards = {
-	}
-
-	nitg_send_spellcards(prefix_spellcards)
-end)"
+		local s = GAMESTATE:GetCurrentSong()
+		s:SetNumSpellCards(n)
+		for i = 0, n - 1 do
+			s:SetSpellCardTiming(i, spellcards[i][1], spellcards[i][2])
+			s:SetSpellCardName(i, spellcards[i].name)
+			s:SetSpellCardDifficulty(i, spellcards[i].difficulty)
+			s:SetSpellCardColor(i, spellcards[i].color[1], spellcards[i].color[2], spellcards[i].color[3], spellcards[i].color[4])
+		end
+	end}
+	
+end)" />

@@ -98,6 +98,8 @@
 	
 	{178, 2, outQuad, 0, 'magnitude'}
 	
+	{370, 0, instant, 300, 'drawsize', 50, 'shrinklineary'}
+	
 	wiggle(116, 172-116, 8, outQuad, -15, 'rotationx')
 	
 	wiggle0(116, 172-116, 16, inQuad, -15, 'zoom')
@@ -113,6 +115,13 @@
 	
 	for beat=102,115,.25 do
 		m_ea{beat, .125, square, 100, 'dark'}
+	end
+	
+	--7, 'xmod', 130, 'mini', -80, 'rotationx', 140, 'confusionxoffset',
+	
+	for beat=370,372,.125 do
+		add{beat, 0, instant, 50/17, 'flip', 100/17, 'centered', -100/17, 'movex0', 100/17, 'movey1', -100/17, 'movey2', 100/17, 'movex3', 100/17, 'reverse2', 600/17, 'dpad_setup', 7/17, 'xmod', 130/17, 'mini', -80/17, 'rotationx', 140/17, 'confusionxoffset'}
+		-- print(beat)
 	end
 	
 	local fuck_appr = {{2, 4}, {34, 36}}
@@ -237,6 +246,10 @@
 	-- spellcard {beat, length, color = {r, g, b, a}, name = name, difficulty = diffnum [, mode = 'end']}
 	-- let's you add spellcards to a chart.
 	-- `color`, `name`, and `difficulty` are all optional.
+	spellcard{0, 28, color = {.5, 0, 0, 1}, name = 'did anyone order a d-pad?'}
+	spellcard{100, 176, color = {.75, 0, 0, 1}, name = 'sike, have another d-pad', mode = 'end'}
+	spellcard{372, 400, color = {1, 0, 0, 1}, name = 'd-pad, electric tripleloo', mode = 'end'}
+	
 	
 end)"
 	Type = "ActorFrame"
