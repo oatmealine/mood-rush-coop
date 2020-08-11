@@ -109,8 +109,15 @@
 	{396, 404, outQuad, -69, 'mini', 360, 'centered', .69, 'xmod', mode = 'end'}
 	
 	{400, 0, instant, 0, 'hide', plr = 3}
+	{400, 0, instant, 100, 'stealth', plr = {1, 2}}
+	{400, 0, instant, 0, 'rotationy', 0, 'confusionoffset'}
 	
-	{401, 0, instant, 100, 'stealth', plr = {1, 2}}
+	{402, 0, instant, 0, 'stealth', plr = {1, 2}}
+	
+	{404, 1, kick(6), 800, 'centered', -1337, 'tinyx'}
+	{404, 6, linear, 0, 'zoom', 90*6, 'rotationy', -1, 'nyoom'}
+	
+	{405, 0, instant, 100, 'disablemines'}
 	
 	wiggle(116, 172-116, 8, outQuad, -15, 'rotationx')
 	
@@ -135,10 +142,7 @@
 	end
 	
 	for beat=402,404,.25 do
-		local switch = {{1,2}, 3}
-		local percentageSwitch = {0, 100}
-		m_ea{beat, 0, instant, percentageSwitch[math.mod(beat * 4, 2) + 1], 'stealth', plr = switch[math.mod(beat * 4, 2) + 1]}
-		-- print(switch[math.mod(beat * 4, 2) + 1])
+		m_ea{beat, .145, square, 100, 'stealth', plr = 3}
 	end
 	
 	local fuck_appr = {{2, 4}, {34, 36}}
@@ -149,7 +153,7 @@
 		end
 	end
 	
-	local fuck_appr2 = {{13, 20}, {116, 123}, {124, 131}, {132, 138}, {148, 162}, {163, 172}, {370, 372}}
+	local fuck_appr2 = {{13, 20}, {116, 123}, {124, 131}, {132, 138}, {148, 162}, {163, 172}, {250, 252}, {370, 372}}
 	
 	for i,v in pairs(fuck_appr2) do
 		for beat=v[1],v[2],.25 do
@@ -248,6 +252,8 @@
 		if P[3] then
 			P[3]:hidden(0)
 		end
+		
+		MESSAGEMAN:Broadcast('ShowEye')
 	end}
 	
 	
@@ -297,6 +303,7 @@
 	spellcard{0, 28, color = {.5, 0, 0, 1}, name = 'did anyone order a d-pad?'}
 	spellcard{100, 176, color = {.75, 0, 0, 1}, name = 'sike, have another d-pad', mode = 'end'}
 	spellcard{372, 400, color = {1, 0, 0, 1}, name = 'd-pad, electric tripleloo', mode = 'end'}
+	spellcard{402, 404, color = {0, 0, 1, 1}, name = 'yeah, hit that quad, its good', mode = 'end'}
 	
 	
 end)"
