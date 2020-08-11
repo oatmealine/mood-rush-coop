@@ -58,6 +58,17 @@ Type = "ActorFrame"
 	<Layer Type = "ActorProxy" Name = "proxy.notefield[2]" />
 	<Layer Type = "ActorProxy" Name = "proxy.notefield[3]" />
 
+	<!-- for march part -->
+	<Layer Type = "ActorProxy" Name = "oat_proxyMarch[1]" />
+	<Layer Type = "ActorProxy" Name = "oat_proxyMarch[2]" />
+	<Layer Type = "ActorProxy" Name = "oat_proxyMarch[3]" />
+	<Layer Type = "ActorProxy" Name = "oat_proxyMarch[4]" />
+	<Layer Type = "ActorProxy" Name = "oat_proxyMarch[5]" />
+	<Layer Type = "ActorProxy" Name = "oat_proxyMarch[6]" />
+	<Layer Type = "ActorProxy" Name = "oat_proxyMarch[7]" />
+	<Layer Type = "ActorProxy" Name = "oat_proxyMarch[8]" />
+	<Layer Type = "ActorProxy" Name = "oat_proxyMarch[9]" />
+
 	<!-- players go wee -->
 	<Layer Type="Sprite" Frag="shaders/lumikey.frag" InitCommand = "%xero.sprite" Name = "oat_screenplayeraftsprite[1]" />
 	<Layer Type="Sprite" Frag="shaders/lumikey.frag" InitCommand = "%xero.sprite" Name = "oat_screenplayeraftsprite[2]" />
@@ -70,55 +81,14 @@ Type = "ActorFrame"
 	<Layer Type="Sprite" Frag="shaders/lumikey.frag" InitCommand = "%xero.sprite" Name = "oat_screenplayeraftsprite[9]" />
 	<Layer Type="Sprite" Frag="shaders/lumikey.frag" InitCommand = "%xero.sprite" Name = "oat_screenplayeraftsprite[10]" />
 
-	<Layer 
-		Type = "ActorFrameTexture" 
-		InitCommand = "%xero.aft" 
-		Name = "fuck_aft" 
-	/>
-
-	<Layer 
-		Type = "Sprite"
-		Frag = "shaders/fisheye.frag"
-		InitCommand = "%xero.sprite" 
-		Name = "fuck_fisheye" 
-		OnCommand="%function(self) 
-			xero()
-			self:SetTexture(fuck_aft:GetTexture())
-			self:diffusealpha(0)
-		end"
-		HideEyeMessageCommand="diffusealpha,0"
-		ShowEyeMessageCommand="diffusealpha,1"
-	/>
-
-	<Layer 
-		Type = "Sprite"
-		Frag = "shaders/post.frag"
-		InitCommand = "%xero.sprite" 
-		Name = "fuck_post" 
-		OnCommand="%function(self) 
-			xero()
-			self:SetTexture(fuck_aft:GetTexture())
-			self:diffusealpha(0)
-		end"
-		HidePostMessageCommand="diffusealpha,0"
-		ShowPostMessageCommand="diffusealpha,1"
-	/>
-
-	<!-- post-proc -->
-
-	<Layer 
-		Type = "ActorFrameTexture" 
-		InitCommand = "%xero.aft" 
-		Name = "oat_postaft" 
-	/>
-	<Layer 
-		Type = "Sprite"
-		Frag = "shaders/glitch2.frag"
-		InitCommand = "%xero.sprite" 
-		Name = "oat_postsprite" 
-	/>
-
 	<!-- funny finorza shards --->
+	<Layer Type = "ActorFrameTexture" InitCommand = "%xero.aft" Name = "oat_postaft" />
+
+	<Layer File="white" InitCommand="%function(self)
+		self:xy(SCREEN_CENTER_X, SCREEN_CENTER_Y)
+		self:zoomto(SCREEN_WIDTH, SCREEN_HEIGHT)
+	end"/>
+
 	<Layer Type="Sprite" InitCommand = "%xero.sprite" Name = "oat_partsaftspritebehind" />
 
 	<Layer Type="Sprite" InitCommand = "%xero.sprite" Name = "oat_partsaftsprite[1]" />
@@ -337,6 +307,48 @@ Type = "ActorFrame"
 	<Layer Type="Sprite" InitCommand = "%xero.sprite" Name = "oat_partsaftsprite[214]" />
 	<Layer Type="Sprite" InitCommand = "%xero.sprite" Name = "oat_partsaftsprite[215]" />
 	<Layer Type="Sprite" InitCommand = "%xero.sprite" Name = "oat_partsaftsprite[216]" />
+
+	<!-- post-proc -->
+	<Layer 
+		Type = "ActorFrameTexture" 
+		InitCommand = "%xero.aft" 
+		Name = "fuck_aft" 
+	/>
+
+	<Layer 
+		Type = "Sprite"
+		Frag = "shaders/fisheye.frag"
+		InitCommand = "%xero.sprite" 
+		Name = "fuck_fisheye" 
+		OnCommand="%function(self) 
+			xero()
+			self:SetTexture(fuck_aft:GetTexture())
+			self:diffusealpha(0)
+		end"
+		HideEyeMessageCommand="diffusealpha,0"
+		ShowEyeMessageCommand="diffusealpha,1"
+	/>
+
+	<Layer 
+		Type = "Sprite"
+		Frag = "shaders/post.frag"
+		InitCommand = "%xero.sprite" 
+		Name = "fuck_post" 
+		OnCommand="%function(self) 
+			xero()
+			self:SetTexture(fuck_aft:GetTexture())
+			self:diffusealpha(0)
+		end"
+		HidePostMessageCommand="diffusealpha,0"
+		ShowPostMessageCommand="diffusealpha,1"
+	/>
+
+	<Layer 
+		Type = "Sprite"
+		Frag = "shaders/glitch2.frag"
+		InitCommand = "%xero.sprite" 
+		Name = "oat_postsprite" 
+	/>
 
 	<Layer File = "oat/oat.xml" />
 	<Layer File = "kirbo/kirbo.xml" />
