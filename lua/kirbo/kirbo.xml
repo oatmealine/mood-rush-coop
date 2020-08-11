@@ -100,6 +100,8 @@
 	
 	{370, 0, instant, 300, 'drawsize', 50, 'shrinklineary'}
 	
+	{372, 400, linear, 90*(400-372), 'rotationy', mode = 'end'}
+	
 	wiggle(116, 172-116, 8, outQuad, -15, 'rotationx')
 	
 	wiggle0(116, 172-116, 16, inQuad, -15, 'zoom')
@@ -120,7 +122,7 @@
 	--7, 'xmod', 130, 'mini', -80, 'rotationx', 140, 'confusionxoffset',
 	
 	for beat=370,372,.125 do
-		add{beat, 0, instant, 7/17, 'xmod', 130/17, 'mini', -80/17, 'rotationx', 140/17, 'confusionxoffset'}
+		add{beat, 0, instant, 25/17, 'flip', -25/17, 'invert', -100/17, 'movez1', 100/17, 'movez2', 7/17, 'xmod', 160/17, 'mini', -90/17, 'rotationx', 157/17, 'confusionxoffset'}
 		-- print(beat)
 	end
 	
@@ -151,6 +153,13 @@
 	
 	for i = 1,table.getn(fuck_poof2) do
 		local beat = fuck_poof2[i]
+		m_ea{beat[1], 1, kick(6), -500, 'tiny'}
+	end
+	
+	local fuck_poof3 = (P[1] or P[2]):GetNoteData(372, 400)
+	
+	for i = 1,table.getn(fuck_poof3) do
+		local beat = fuck_poof3[i]
 		m_ea{beat[1], 1, kick(6), -500, 'tiny'}
 	end
 	
@@ -206,6 +215,12 @@
 	        proxy.notefield[pn]:vibrate()
 	    end
 	end}
+	{372, 400, function(beat, mods)	
+		for pn = 1, max_pn do
+			-- rotationz has counteracting confusionoffset
+			mods[pn].confusionoffset = 100*math.rad(mods[pn].rotationy)
+		end
+	end, mode = 'end'}
 	
 	
 	-- alias (name [, effect])
