@@ -7,6 +7,11 @@
 		aft:cropright(0.01)
 		aft:cropleft(0.01)
 		aft:cropbottom(0.01)
+
+		aft:y(sh / 4)
+		aft:rotationz(math.random(-20, 20))
+		aft:x(math.random(sw/6, sw/6*5))
+		aft:zoom(0.8)
 	end
 
 	oat_randomvert:hidden(1)
@@ -93,9 +98,9 @@
 
 	local function bounc(a)
 		if a < 0.5 then
-			return outCirc(a/2)
+			return outCirc(a * 2)
 		else
-			return inCirc(a/2-1)
+			return 1 - inCirc(a * 2 - 1)
 		end
 	end
 
@@ -164,6 +169,69 @@
 	ease {249.833 - 0.5, 0.5 * 2, inOutCirc, -200, 'tipsy', -5, 'rotationz'}
 	ease {250.75 - 0.5, 0.5 * 2, inOutCirc, 0, 'tipsy', 10, 'rotationz', 100, 'reverse'}
 	ease {252 - 0.5, 0.5 * 2, inOutCirc, 0, 'rotationz', 0, 'reverse'}
+
+	for i,b in ipairs(jump) do
+		local aftNum = ((i - 1) % #oat_screenplayeraftsprite) + 1
+		local aftNumRaw = i
+		local playerNum = ((aftNum - 1) % #oat_screenplayeraft) + 1
+		local aft = oat_screenplayeraftsprite[aftNum]
+		
+		ease {b[1], 1, outCirc, 1, function(a)
+			aft:y(sh * 1.5 - a * sh)
+			aft:diffusealpha(1)
+		end}
+		ease {b[1] + 1, 1, inCirc, 1, function(a)
+			aft:y(sh/2 + a * sh)
+		end}
+	end
+
+	ease {251, 1, inCirc, 1, function(a)
+		for pn = 1, 2 do
+			proxy.notefield[pn]:y(sh/2 + sh * a)
+		end
+	end}
+	ease {255, 1, outCirc, 1, function(a)
+		for pn = 1, 2 do
+			proxy.notefield[pn]:y(sh * 1.5 - sh * a)
+		end
+	end}
+	ease {259, 1, inCirc, 1, function(a)
+		for pn = 1, 2 do
+			proxy.notefield[pn]:y(sh/2 + sh * a)
+		end
+	end}
+	ease {259, 1, outCirc, 1, function(a)
+		for pn = 1, 2 do
+			proxy.notefield[pn]:rotationz(a * 360)
+		end
+	end}
+	ease {263, 1, outCirc, 1, function(a)
+		for pn = 1, 2 do
+			proxy.notefield[pn]:y(sh * 1.5 - sh * a)
+		end
+	end}
+
+	ease {256, 1, outCirc, 180, 'rotationy', confOff(-180), 'confusionyoffset'}
+	set {257, 0, 'rotationy', 0, 'confusionyoffset', 100, 'flip'}
+	ease {257, 1, outCirc, 180, 'rotationx', confOff(-180), 'confusionxoffset'}
+	set {258, 0, 'rotationx', 0, 'confusionxoffset', 100, 'reverse'}
+	ease {258, 1, outCirc, 180, 'rotationz', confOff(-180), 'confusionzoffset'}
+	set {259, 0, 'rotationz', 0, 'confusionzoffset', 0, 'reverse', 0, 'flip'}
+
+	ease {264, 0.4, outCirc, 100, 'reverse'}
+	ease {264 + 2/3, 0.4, outCirc, 0, 'reverse'}
+	ease {265, 0.4, outCirc, 100, 'invert'}
+	ease {265 + 2/3, 0.4, outCirc, 0, 'invert'}
+	ease {266, 0.4, outCirc, 100, 'reverse'}
+	ease {266 + 2/3, 0.4, outCirc, 0, 'reverse'}
+
+	ease {267, 1, bounce, -5000, 'tiny'}
+
+	func {267.5, function()
+		for i,aft in ipairs(oat_screenplayeraftsprite) do
+			aft:hidden(1)
+		end
+	end}
 end)"
 	Type = "ActorFrame"
 ><children>
