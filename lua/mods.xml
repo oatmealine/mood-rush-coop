@@ -5,7 +5,7 @@
 	self:fov(45)
 	for pn = 1, 2 do
 		function temp(proxy, child)
-			child:hidden(0)
+			child:hidden(1)
 			child:sleep(9e9)
 			proxy:SetTarget(child)
 			proxy:xy(scx * (pn - 0.5), scy)
@@ -30,14 +30,14 @@
 end)"
 Type = "ActorFrame"
 ><children>
-
-	<Layer File = "oat/oat.xml" />
-	<Layer File = "kirbo/kirbo.xml" />
 	
 	<Layer Type = "ActorFrame" Name = "fuck_notefield" FOV="45" ><children>
 		<Layer Type = "ActorProxy" Name = "proxy.notefield[1]" />
 		<Layer Type = "ActorProxy" Name = "proxy.notefield[2]" />
 	</children></Layer>
+	
+	<Layer File = "oat/oat.xml" />
+	<Layer File = "kirbo/kirbo.xml" />
 
 	<Layer Type = "ActorProxy" Name = "proxy.combo[1]" />
 	<Layer Type = "ActorProxy" Name = "proxy.combo[2]" />

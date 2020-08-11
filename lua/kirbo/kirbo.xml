@@ -44,10 +44,10 @@
 	{2, 0, instant, 100, 'spiralholds', 700, 'zoomz'}
 	
 	{4, 0, instant, 0, 'stealth', 0, 'dark'}
-	{4, 12, outQuad, -25, 'rotationx', 100, 'mini', mode = 'end'}
+	{4, 12, outQuad, -25, 'rotationx', 30, 'zoom', mode = 'end'}
 	{4, 20, linear, 70*(19-4), 'rotationz', mode = 'end'}
 	
-	{12, 8, outQuad, 0, 'mini', 0, 'rotationx'}
+	{12, 8, outQuad, 100, 'zoom', 0, 'rotationx'}
 	
 	{20, 8, inQuad, -180*8, 'rotationz', -.85, 'nyoom', 75, 'mini', 100, 'longholds', 1337, 'zoomz'}
 	
@@ -164,13 +164,13 @@
 			P[pn]:GetChild('Combo'):hidden(1)
 	    end
 		
-		for pn = 1, 2 do
-			proxy.notefield[pn]:hidden(1)
-			proxy.notefield[pn]:x(P[pn]:GetX())
-		end
-		
 		MESSAGEMAN:Broadcast('ShowEye')
 	end}
+	{0, 404, function(beat, mods)
+		for pn = 1, 2 do
+			proxy.notefield[pn]:x(P[pn]:GetX())
+		end
+	end, mode = 'end'}
 	{4, 28, function(beat, mods)	
 		for pn = 1, max_pn do
 			-- rotationz has counteracting confusionoffset
@@ -202,28 +202,9 @@
 		end
 	end, mode = 'end'}
 	{176, function(beat)
-		for pn = 1, max_pn do
-	        P[pn]:vibrate()
-	    end
-	end}
-	-- for oat
-	{252, function(beat)
-		for pn = 1, max_pn do
-	        P[pn]:hidden(1)
-	    end
-		
 		for pn = 1, 2 do
-			proxy.notefield[pn]:hidden(0)
-		end
-	end}
-	{372, function(beat)
-		for pn = 1, max_pn do
-	        P[pn]:hidden(0)
+	        proxy.notefield[pn]:vibrate()
 	    end
-		
-		for pn = 1, 2 do
-			proxy.notefield[pn]:hidden(1)
-		end
 	end}
 	
 	
@@ -256,8 +237,8 @@
 	end)
 	
 	alias('magnitude', function(percent)
-		for pn = 1, max_pn do
-			P[pn]:effectmagnitude(percent, percent, percent)
+		for pn = 1, 2 do
+			proxy.notefield[pn]:effectmagnitude(percent, percent, percent)
 		end
 	end)
 	
