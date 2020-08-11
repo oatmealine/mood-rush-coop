@@ -195,7 +195,7 @@
 			proxy.notefield[pn]:y(sh * 1.5 - sh * a)
 		end
 	end}
-	ease {259, 1, inCirc, 1, function(a)
+	ease {260, 1, inCirc, 1, function(a)
 		for pn = 1, 2 do
 			proxy.notefield[pn]:y(sh/2 + sh * a)
 		end
