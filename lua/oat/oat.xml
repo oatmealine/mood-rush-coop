@@ -54,6 +54,24 @@
 		v:x( size/2 + modulo(ni,12)*size + roffset*sw )
 		v:y( size/2 + vni*size )
 	end
+	
+	local proxPos = {}
+	local proxZoom = 0.8
+	local proxDist = 64 * 4 * proxZoom -- 4 - column number
+	for i,prox in ipairs(oat_proxyMarch) do
+		local pn = ((i - 1) % 2) + 1
+
+		local start = scx - proxDist * #oat_proxyMarch/2
+
+		local x = start + proxDist * (i - 1)
+
+		prox:SetTarget(P[pn]:GetChild('NoteField'))
+		proxPos[i] = x
+		prox:xy(scx, scy)
+
+		prox:hidden(1)
+		prox:diffusealpha(1/#oat_proxyMarch)
+	end
 
 	-- util funcs
 	function table.contains(table, element)
@@ -273,14 +291,17 @@
 
 	for _,b in ipairs(kick) do
 		ease {b[1], 1, createReverse(outCirc), 1, function(a)
-			for i,v in ipairs(oat_partsaftsprite) do
-				local stren = 4
+			local stren = 4
+			local rotstren = 20
 
+			oat_partsaftspritebehind:x(scx + a * math.random(-sw/50, sh/50) * stren * 0.7)
+			oat_partsaftspritebehind:y(scy + a * math.random(-sh/40, sh/40) * stren * 0.7)
+
+			for i,v in ipairs(oat_partsaftsprite) do
 				v:x(origPos[i][1] + a * math.random(-sw/50, sw/20) * stren)
 				v:y(origPos[i][2] + a * math.random(-sh/40, sh/40) * stren)
 
 				--math.randomseed(aftNumRaw + i)
-				local rotstren = 20
 				v:rotationx(math.random(-rotstren, rotstren) * a)
 				v:rotationy(math.random(-rotstren, rotstren) * a)
 				v:rotationz(math.random(-rotstren, rotstren) * a)
@@ -306,6 +327,41 @@
 			end
 		end}
 	end
+
+	func {268, function()
+		proxy.notefield[1]:hidden(1)
+		proxy.notefield[2]:hidden(1)
+		for _,prox in ipairs(oat_proxyMarch) do
+			prox:hidden(0)
+		end
+	end}
+
+	ease {274, 1, outCirc, 1, function(a)
+		for _,prox in ipairs(oat_proxyMarch) do
+			prox:zoom(mix(1, proxZoom, a))
+			prox:diffusealpha(mix(1/#oat_proxyMarch, 1, a))
+		end
+	end}
+	ease {275, 1, outCirc, -90, 'y', 200, 'drawsize', 360, 'rotationy', confOff(-360), 'confusionyoffset', 1, function(a)
+		for i,prox in ipairs(oat_proxyMarch) do
+			prox:x(mix(scx, proxPos[i], a))
+		end
+	end}
+
+	ease {302, 2, inCirc, 1, function(a)
+		for _,prox in ipairs(oat_proxyMarch) do
+			prox:y(sh/2 + a * sh)
+		end
+	end}
+	ease {302, 2, outCirc, 0, 'y', 0, 'drawsize', 1, function(a)
+		proxy.notefield[1]:hidden(0)
+		proxy.notefield[2]:hidden(0)
+		for pn = 1, 2 do
+			proxy.notefield[pn]:y(sh * 1.5 - sh * a)
+		end
+	end}
+
+	spellcard{276, 304, color = {.7, 0, 0, 1}, name = 'heard u liked finorza'}
 end)"
 	Type = "ActorFrame"
 ><children>
