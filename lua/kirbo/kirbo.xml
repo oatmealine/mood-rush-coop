@@ -71,23 +71,30 @@
 	{116, 123, linear, -90*(123-116), 'rotationz', mode = 'end'}
 	
 	{123, 1, linear, 0, 'rotationz', 600, 'dpad_setup', -100, 'movex0', 100, 'movey1', -100, 'movey2', 100, 'movex3', 0, 'reverse1', 100, 'reverse2', 0, 'drawsize'}
+	{123, 1, kick(2), 0.75, 'noize'}
 	
 	{124, 131, linear, 90*(131-124), 'rotationz', mode = 'end'}
 	
 	{131, 1, linear, 0, 'rotationz', 600, 'dpad_setup2', -300, 'movex0', 300, 'movey1', -300, 'movey2', 300, 'movex3', 100, 'reverse1', 0, 'reverse2', -50, 'drawsize'}
+	{131, 1, kick(2), 0.75, 'noize'}
 	
 	{132, 144, linear, -90*(144-132), 'rotationz', mode = 'end'}
 	
+	{139, 1, kick(2), 0.75, 'noize'}
+	
 	{144, 4, linear, 0, 'rotationz', 600, 'dpad_setup', -100, 'movex0', 100, 'movey1', -100, 'movey2', 100, 'movex3', 0, 'reverse1', 100, 'reverse2', 0, 'drawsize'}
+	{144, 4, kick(2), 1.5, 'noize'}
 	
 	{148, 162.5, linear, 90*(162.5-148), 'rotationz', mode = 'end'}
 	
 	{162.5, 1, linear, 0, 'rotationz', 600, 'dpad_setup2', -300, 'movex0', 300, 'movey1', -300, 'movey2', 300, 'movex3', 100, 'reverse1', 0, 'reverse2', -50, 'drawsize'}
+	{162.5, 1, kick(2), 0.75, 'noize'}
 	
 	{163, 172, linear, -90*(172-164), 'rotationz', mode = 'end'}
 	
 	{176, 4, outQuad, 0, 'rotationz', 0, 'confusionoffset', 0, 'dpad_setup2', 0, 'movex0', 0, 'movey1', 0, 'movey2', 0, 'movex3', 0, 'reverse1', 0, 'drawsize', 0, 'flip', 0, 'centered', 1.85, 'xmod', 100, 'zoom', 100, 'zoomz'}
 	{176, 2, outQuad, 169, 'magnitude'}
+	{176, 4, kick(2), 1.25, 'noize'}
 	
 	{178, 2, outQuad, 0, 'magnitude'}
 	
@@ -170,6 +177,9 @@
 	        P[pn]:linear(5)
 	        P[pn]:x(scx)
 	    end
+		
+		MESSAGEMAN:Broadcast('HideEye')
+		MESSAGEMAN:Broadcast('ShowPost')
 	end}
 	{116, 172, function(beat, mods)	
 		for pn = 1, max_pn do
@@ -218,6 +228,11 @@
 		end
 	end)
 	
+	alias('noize', function(percent)
+		fuck_post:GetShader():uniform1f('glitchAmp', percent/5)
+		fuck_post:GetShader():uniform1f('hnoise', percent/5)
+	end)
+	
 	
 	-- spellcard {beat, length, color = {r, g, b, a}, name = name, difficulty = diffnum [, mode = 'end']}
 	-- let's you add spellcards to a chart.
@@ -247,6 +262,20 @@ end)"
 	end"
 	HideEyeMessageCommand="diffusealpha,0"
 	ShowEyeMessageCommand="diffusealpha,1"
+/>
+
+<Layer 
+	Type = "Sprite"
+	Frag = "Shaders/post.frag"
+	InitCommand = "%xero.sprite" 
+	Name = "fuck_post" 
+	OnCommand="%function(self) 
+		xero()
+		self:SetTexture(fuck_aft:GetTexture())
+		self:diffusealpha(0)
+	end"
+	HidePostMessageCommand="diffusealpha,0"
+	ShowPostMessageCommand="diffusealpha,1"
 />
 
 </children></Mods>
