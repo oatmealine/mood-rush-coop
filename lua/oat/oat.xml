@@ -377,11 +377,13 @@
 			prox:diffusealpha(mix(1/#oat_proxyMarch, 1, a))
 		end
 	end}
-	ease {275, 1, outCirc, -90, 'y', 200, 'drawsize', 360, 'rotationy', confOff(-360), 'confusionyoffset', 1, function(a)
+	ease {274, 2, inOutCirc, -90, 'y', 200, 'drawsize', 360 * 2, 'rotationy', confOff(-360 * 2), 'confusionyoffset', 1, function(a)
 		for i,prox in ipairs(oat_proxyMarch) do
 			prox:x(mix(scx, proxPos[i], a))
 		end
 	end}
+
+	ease {274, 2, bounc, -400, 'tinyz'}
 
 	ease {302, 2, inCirc, 1, function(a)
 		for i,prox in ipairs(oat_proxyMarch) do
