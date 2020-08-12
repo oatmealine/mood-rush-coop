@@ -53,12 +53,12 @@
 	
 	{12, 8, outQuad, 100, 'zoom', 0, 'rotationx'}
 	
-	{20, 8, inQuart, -180*8, 'rotationz', -.85, 'nyoom', 75, 'mini', 100, 'longholds', 1337, 'zoomz'}
+	{20, 8, inQuart, -180*8, 'rotationz', -.85, 'nyoom', 50, 'zoom', 100, 'longholds', 1337, 'zoomz'}
 	
 	{28, 1, outExpo, 100, 'stealth', 100, 'dark'}
 	{28, 1, kick(4), -500, 'tiny'}
 	
-	{32, 0, instant, 0, 'dpad_setup', 0, 'rotationz', 0, 'confusionoffset', 100, 'zoomz', 0, 'mini', 0, 'longholds', 0, 'nyoom'}
+	{32, 0, instant, 0, 'dpad_setup', 0, 'rotationz', 0, 'confusionoffset', 100, 'zoomz', 100, 'zoom', 0, 'longholds', 0, 'nyoom'}
 	
 	-- haha point one
 	{36.1, 0, instant, 0, 'stealth', 0, 'dark', 0, 'flip', 0, 'centered', 0, 'movex0', 0, 'movey1', 0, 'movey2', 0, 'movex3', 0, 'reverse2', 0, 'spiralholds'}
@@ -153,11 +153,21 @@
 		end
 	end
 	
-	local fuck_appr2 = {{13, 20}, {116, 123}, {124, 131}, {132, 138}, {148, 162}, {163, 172}, {250, 252}, {370, 372}}
+	local fuck_appr2 = {{13, 20}, {116, 123}, {124, 131}, {132, 138}, {148, 162}, {163, 172}, {250, 252}, {306, 308}, {370, 372}}
 	
 	for i,v in pairs(fuck_appr2) do
 		for beat=v[1],v[2],.25 do
 			m_ea{beat, .145, square, 100, 'hide'}
+		end
+	end
+	
+	local fuck_psy = {{4.5, 28}, {116.5, 123}, {124.5, 131}, {132.5, 144}, {148.5, 162}, {163.5, 172}, {341.5, 347}, {348.5, 354}, {356.5, 368}, {372.5, 400}}
+	
+	for i,v in pairs(fuck_psy) do
+		for beat=v[1],v[2],.25 do
+			local column = math.mod(beat * 4, 4)
+			m_ea{beat, 1, kick(6), 65, 'arrowpath'..column..''}
+			-- print(column)
 		end
 	end
 	
@@ -179,7 +189,7 @@
 	
 	for i = 1,table.getn(fuck_poof3) do
 		local beat = fuck_poof3[i]
-		m_ea{beat[1], 1, kick(6), -500, 'tiny'}
+		m_ea{beat[1], 1, kick(6), -500, 'tiny', 1, 'noize'}
 	end
 	
 	-- mm {{beat [, len [, mode = 'end']], function(beat, poptions) ... end [, defer = true]}
@@ -241,6 +251,9 @@
 	end}
 	{180, function(beat)
 		MESSAGEMAN:Broadcast('HidePost')
+	end}
+	{372, function(beat)
+		MESSAGEMAN:Broadcast('ShowPost')
 	end}
 	{372, 400, function(beat, mods)	
 		for pn = 1, max_pn do
