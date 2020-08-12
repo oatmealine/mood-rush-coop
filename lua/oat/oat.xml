@@ -457,6 +457,10 @@
 		end
 	end}
 
+	func {307, function()
+		oat_partsaftspritebehind:hidden(1)
+	end}
+
 	ease {303, 2/3 * 2, inOutCirc, -200, 'tipsy'}
 	ease {304 - 2/3, 2/3 * 2, inOutCirc, 200, 'tipsy'}
 	ease {304, 2/3 * 2, inOutCirc, -200, 'tipsy'}
