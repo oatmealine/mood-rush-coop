@@ -9,8 +9,10 @@
 
 			child:hidden(1)
 			child:sleep(9e9)
+			child:zbias(9e9)
 			proxy:SetTarget(child)
 			proxy:xy(sw/4*((pn-1)*2+1), scy)
+			proxy:zbias(9e9)
 		end
 		temp(proxy.notefield[pn], P[pn]:GetChild'NoteField')
 		temp(proxy2.notefield[pn], P[pn]:GetChild'NoteField')

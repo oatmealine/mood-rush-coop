@@ -1,7 +1,7 @@
 <CODE Type="Quad" OnCommand="hidden,1"
 InitCommand="%function(self)
 invertkicks = {
-	{308.000,0,1},
+	--{308.000,0,1},
 	{309.000,2,1},
 	{310.000,1,1},
 	{311.000,3,1},

@@ -15,6 +15,7 @@
 	end
 
 	oat_randomvert:hidden(1)
+	oat_playstationvert:hidden(1)
 	oat_postsprite:SetTexture(fuck_aft:GetTexture())
 	oat_postsprite:hidden(1)
 	
@@ -322,8 +323,8 @@
 			end
 		end}
 		ease {b[1], 1, createReverse(outCirc), 120, 'bumpy', 150, 'bumpyx', 2, 'playstation', -30, 'tiny', 0.5, 'glitch2', 1, function(a)
-			local stren = 5
-			local rotstren = 20
+			local stren = 8
+			local rotstren = 50
 
 			oat_partsaftspritebehind:x(scx + a * math.random(-sw/50, sh/50) * stren * 0.7)
 			oat_partsaftspritebehind:y(scy + a * math.random(-sh/40, sh/40) * stren * 0.7)
@@ -340,25 +341,64 @@
 		end}
 	end
 
+	for i,b in ipairs(dooo) do
+		local perc = (i % 2 == 0) and -1 or 1
+		local nextBeat = dooo[i + 1]
+		ease {b[1], b.length or ((nextBeat[1] or (b[1] + 1)) - b[1]), createReverse(outCirc), 100, 'tanbumpy', -500, 'tiny', 500, 'bumpyx', -90, 'bumpyxperiod', -100, 'tinyz', 0.1, 'glitch2', perc, function(a)
+			for i,v in ipairs(oat_partsaftsprite) do
+				if a <= 0 then
+					local rowOff = 24
+					local off = ((i % (rowOff*2)) < rowOff) and -1 or 1
+					local trueOffset = sw/10 * a
+
+					v:x(origPos[i][1] + trueOffset * off)
+				else
+					local off = (i % 2 == 0) and -1 or 1
+					local trueOffset = sh/10 * a
+
+					v:y(origPos[i][2] + trueOffset * off)
+				end
+			end
+		end}
+	end
+
+	ease {302, 4, outCirc, 1, function(a)
+		for _,v in ipairs(oat_partsaftsprite) do
+			v:rotationz(a * 360)
+		end
+	end}
+
+	ease {338, 2, inOutCirc, 1, function(a)
+		for _,v in ipairs(oat_partsaftsprite) do
+			v:rotationz(a * 360)
+		end
+	end}
+
+
 	-- func {276, wrap(enablePlaystationVert({1, 2}))}
 	func {308, wrap(enableRandVert({1, 2}))}
 
 	for _,b in ipairs(onlykicks) do
-		ease {b[1], 1, createReverse(outCirc), 10, 'bumpyx', 0.03, 'arrowfuck', 0.03, 'fuckarrow', 1.2, 'glitch2', -30, 'tiny', 1, function(a)
-			local stren = 10
+		ease {b[1], 1, createReverse(outCirc), 10, 'bumpyx', 0.05, 'arrowfuck', 0.05, 'fuckarrow', 1.2, 'glitch2', -60, 'tiny', 1, function(a)
+			local stren = 13
 			local rotstren = 90
 			
 			oat_partsaftspritebehind:x(scx + a * math.random(-sw/50, sh/50) * stren * 0.7)
 			oat_partsaftspritebehind:y(scy + a * math.random(-sh/40, sh/40) * stren * 0.7)
 
 			for i,v in ipairs(oat_partsaftsprite) do
-				v:x(origPos[i][1] + a * math.random(-sw/50, sw/50) * stren)
+				local rowOff = 24
+				local off = ((i % (rowOff*2)) < rowOff) and -1 or 1
+				local off2 = (math.floor(GAMESTATE:GetSongBeat()) % 2) * 2 - 1 
+				local trueOffset = sw/20 * a
+
+				v:x(origPos[i][1] + a * math.random(-sw/50, sw/50) * stren + trueOffset * off * off2)
 				v:y(origPos[i][2] + a * math.random(-sh/40, sh/40) * stren)
 
 				--math.randomseed(aftNumRaw + i)
 				v:rotationx(math.random(-rotstren, rotstren) * a)
 				v:rotationy(math.random(-rotstren, rotstren) * a)
-				v:rotationz(math.random(-rotstren, rotstren) * a)
+				v:rotationz(math.random(-rotstren * 1.5, rotstren * 1.5) * a)
 			end
 		end}
 	end
@@ -383,7 +423,17 @@
 		end
 	end}
 
-	ease {274, 2, bounc, -400, 'tinyz'}
+	ease {274, 2, bounce, -1000, 'tinyz'}
+
+	ease {283, 1, bounce, -1000, 'tiny'}
+
+	ease {286 + 2/3, 1 + 1/3, outCirc, 360, 'rotationx', confOff(-360), 'confusionxoffset'}
+
+	ease {290, 2, outCirc, 0, 'rotationx', 0, 'confusionxoffset', plr = 1}
+	ease {290, 2, outCirc, 180, 'rotationx', confOff(-180), 'confusionxoffset', 90, 'y', plr = 2}
+
+	ease {302, 2, outCirc, 0, 'rotationx', 0, 'confusionxoffset', -90, 'y', plr = 2}
+	ease {302, 2, bounce, -1500, 'tiny'}
 
 	ease {302, 2, inCirc, 1, function(a)
 		for i,prox in ipairs(oat_proxyMarch) do
@@ -415,7 +465,7 @@
 
 	for b = 308, 332 - 1/3, 1/3 do
 		local blacklist = {315, 324}
-		if not table.contains(blacklist, math.floor(b)) then
+		if not (table.contains(blacklist, math.floor(b)) and (math.mod(b, 1) < 0.5)) then
 			ease {b, 1/3, outSine, 0.9, function(a)
 				for _,v in ipairs(oat_partsaftsprite) do
 					v:diffusealpha(1 - a)
@@ -460,9 +510,18 @@
 	ease {315, 1, createTemp(inSine), 1, function(a)
 		for _,v in ipairs(oat_partsaftsprite) do
 			v:zoom(1 - a)
+			v:rotationz(a * 90)
+		end
+		oat_partsaftspritebehind:diffusealpha(0)
+	end}
+	ease {324, 1, onoff, -1000, 'tiny', 1, function(a)
+		for pn = 1, 2 do
+			local pj = proxy.judge[pn]
+			pj:zoom(1 + a * 10)
+			pj:y(mix(scy, scy * 2, a))
+			pj:x(mix(sw/4*((pn-1)*2+1), scx*0.7, a))
 		end
 	end}
-	ease {324, 1, onoff, -1000, 'tiny'}
 
 	func {307, 332-307, function(beat, poptions)
 		local rot = 60 * outCirc(math.min(beat - 307, 1))
@@ -488,9 +547,10 @@
 
 	spellcard {176, 212, color = {.2, 0, .7, 1}, name = 'glitch2.frag and RotationY in The Adventure For Readability'}
 	spellcard {212, 240, color = {.1, 0, .9, 1}, name = 'RotationY\'s unwanted twin brother'}
-	spellcard {252, 276, color = {.6, 0, .4, 1}, name = 'Wake Up 2'}
-	spellcard {276, 304, color = {.7, 0, 0, 1}, name = 'heard u liked finorza'}
-	spellcard {304, 340, color = {.9, 0, 0, 1}, name = 'Dial-Up Streaming'}
+	spellcard {252, 274, color = {.6, 0, .4, 1}, name = 'Wake Up 2'}
+	spellcard {274, 276, color = {.5, .5, .5, 1}, name = 'lets go'}
+	spellcard {276, 304, color = {.7, 0, 0, 1}, name = 'Heard ya liked Finorza'}
+	spellcard {304, 340, color = {.9, 0, 0, 1}, name = 'Dial-Up Screaming'}
 
 end)"
 	Type = "ActorFrame"
@@ -505,4 +565,5 @@ end)"
 	<CODE File="kick.xml"/>
 	<CODE File="onlykicks.xml"/>
 	<CODE File="invertkicks.xml"/>
+	<CODE File="dooo.xml"/>
 </children></Mods>
