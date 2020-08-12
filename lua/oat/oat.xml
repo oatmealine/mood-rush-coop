@@ -493,7 +493,8 @@
 			oat_postaft:hidden(1)
 		end}
 
-		local mod = (i % 2 == 0) and 'invert' or 'none'
+		local flipmod = (math.floor(i / 2) % 2 == 0) and 'invert' or 'flip'
+		local mod = (i % 2 == 0) and flipmod or 'none'
 		ease {b, 1, onoff, 100, mod}
 	end
 	func {332 + 0.1, function()
