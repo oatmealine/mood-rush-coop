@@ -215,8 +215,8 @@
 
 	func {211, 236-211, function(beat, poptions)
 		local prog = (beat - 211) / (236 - 211)
-		local anglex = mix(0, 360 * 3, prog)
-		local angley = mix(360 * 3, 360 * 1, prog)
+		local anglex = mix(0, 360 * 4, prog)
+		local angley = --[[mix(360 * 3, 360 * 1, prog)]] 0
 
 		local nx, ny, nz = reverseRotation(anglex, angley, 0)
 
@@ -224,7 +224,7 @@
 		poptions[1].confusionyoffset = ny
 	end}
 
-	ease {211, 236-211, linear, 360 * 3, 'rotationx', 360 * 1, 'rotationy', plr = 1}
+	ease {211, 236-211, linear, 360 * 4, 'rotationx', plr = 1}
 	ease {236, 4, outSine, 0, 'rotationx', 0, 'confusionxoffset'}
 
 	ease {240, 3, inSine, 0, 'stealth', 0, 'flip', 0, 'drunky', 0, 'tipsy', 0, 'drunk', 0, 'drunkz', 0, 'bumpyx', 0, 'dark', 0, 'boomerang', 100, 'zoom', 0, 'hidenoteflashes', plr = 2}
@@ -235,6 +235,8 @@
 
 		ease {b[1], 1 + (b[2] or 0) * 0.8, createReverse(outCirc), 0.5, 'glitch2', 20, 'tanbumpyx', 30, 'tanbumpy', 0.4, 'arrowfuck', 0.4, 'fuckarrow', -170, 'tiny' .. xory, 160, 'tipsy', plr = 1}
 	end
+
+	ease {243, 1, createReverse(outCirc), 50, 'flip'}
 
 	ease {244 - 2/3, 2/3 * 2, inOutCirc, 200, 'tipsy'}
 	ease {244, 2/3 * 2, inOutCirc, -200, 'tipsy'}
