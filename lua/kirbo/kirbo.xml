@@ -102,6 +102,14 @@
 	
 	{178, 2, outQuad, 0, 'magnitude'}
 	
+	{208, 3, outQuad, 120, 'flip', -120, 'invert'}
+	
+	{220, 4, outQuad, 120, 'invert', -10, 'flip'}
+	
+	{228, 4, outQuad, 120, 'flip', 0, 'invert'}
+	
+	{236, 4, outQuad, 0, 'flip'}
+	
 	{370, 0, instant, 300, 'drawsize', 50, 'shrinklineary'}
 	
 	{372, 400, linear, 90*(400-372), 'rotationy', mode = 'end'}
