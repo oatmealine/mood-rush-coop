@@ -90,7 +90,7 @@ Type = "ActorFrame"
 		self:zoomto(SCREEN_WIDTH, SCREEN_HEIGHT)
 	end"/>
 
-	<Layer Type="Sprite" InitCommand = "%xero.sprite" Name = "oat_partsaftspritebehind" />
+	<Layer Type="Sprite" Frag="shaders/pixelshuffle.frag" InitCommand = "%xero.sprite" Name = "oat_partsaftspritebehind" />
 
 	<Layer Type="Sprite" InitCommand = "%xero.sprite" Name = "oat_partsaftsprite[1]" />
 	<Layer Type="Sprite" InitCommand = "%xero.sprite" Name = "oat_partsaftsprite[2]" />
