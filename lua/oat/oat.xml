@@ -31,6 +31,8 @@
 	oat_aftspritebehind:SetTexture(oat_postaft:GetTexture())
 	oat_aftspritebehind:diffusealpha(0)
 
+	oat_bg:diffusealpha(0)
+
 	for i,v in ipairs(oat_partsaftsprite) do
 		v:xy(scx, scy)
 		--v:zoomto(sw, sh)
@@ -198,6 +200,10 @@
 		oat_postsprite:GetShader():uniform1f('amount', a / 2)
 		oat_aftspritebehind:GetShader():uniform1f('amount', a)
 		oat_aftspritebehind:diffusealpha(math.max(math.min(a * 10, 0.9), 0.0))
+
+		-- im too lazy to properly implement it so
+		oat_bg:x(scx + math.random(-100, 100)/100 * a * sw/10)
+		oat_bg:y(scy + math.random(-100, 100)/100 * a * sh/10)
 	end}
 
 	-- The Real wenis times
@@ -212,7 +218,14 @@
 	end}
 	func {340, function()
 		oat_postsprite:hidden(1)
-		fuck_post:diffusealpha(1)
+		fuck_post:hidden(0)
+	end}
+
+	ease {274, 2, inOutCirc, 1, function(a)
+		oat_bg:diffusealpha(a)
+	end}
+	ease {338, 2, inOutCirc, 1, function(a)
+		oat_bg:diffusealpha(1 - a)
 	end}
 
 	ease {179, 1, outCirc, 90, 'stealth', -60, 'flip', 200, 'drunky', 400, 'tipsy', 700, 'drunk', 500, 'drunkz', 500, 'bumpyx', 100, 'dark', 100, 'boomerang', -100, 'zoom', 100, 'hidenoteflashes', plr = 2}

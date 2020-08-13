@@ -3,7 +3,7 @@
 	
 	self:SetVanishPoint(scx, scy)
 	self:fov(45)
-	for pn = 1, 3 do
+	for pn = 1, 4 do
 		function temp(proxy, child)
 			if not child or not proxy then return end
 
@@ -30,7 +30,7 @@
 
 	end
 	
-	set{0, 1.85, 'xmod', 100, 'dizzyholds', 100, 'stealthpastreceptors', 100, 'cover'}
+	set{0, 1.85, 'xmod', 100, 'dizzyholds', 100, 'stealthpastreceptors', 100, 'cover', -100, 'arrowpathdrawsizeback'}
 	
 	proxy2.notefield[1]:x(sw/2)
 	proxy2.notefield[2]:x(sw/2)
@@ -52,7 +52,7 @@ Type = "ActorFrame"
 
 	<Layer Type="ActorFrameTexture" InitCommand = "%xero.aft" Name = "oat_screenplayeraft" />
 	
-	<Layer File="white" Frag="shaders/bg.frag" InitCommand="%function(self)
+	<Layer File="white" Name="oat_bg" Frag="shaders/bg.frag" InitCommand="%function(self)
 		self:xy(SCREEN_CENTER_X, SCREEN_CENTER_Y)
 		self:zoomto(SCREEN_WIDTH, SCREEN_HEIGHT)
 	end"/>
@@ -346,10 +346,10 @@ Type = "ActorFrame"
 		OnCommand="%function(self) 
 			xero()
 			self:SetTexture(fuck_aft:GetTexture())
-			self:diffusealpha(0)
+			self:hidden(1)
 		end"
-		HidePostMessageCommand="diffusealpha,0"
-		ShowPostMessageCommand="diffusealpha,1"
+		HidePostMessageCommand="hidden,1"
+		ShowPostMessageCommand="hidden,0"
 	/>
 	
 	<Layer 
@@ -360,10 +360,10 @@ Type = "ActorFrame"
 		OnCommand="%function(self) 
 			xero()
 			self:SetTexture(fuck_aft:GetTexture())
-			self:diffusealpha(0)
+			self:hidden(1)
 		end"
-		HideHoriMessageCommand="diffusealpha,0"
-		ShowHoriMessageCommand="diffusealpha,1"
+		HideHoriMessageCommand="hidden,1"
+		ShowHoriMessageCommand="hidden,0"
 	/>
 
 	<Layer 
