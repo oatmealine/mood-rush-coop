@@ -34,6 +34,10 @@
 	
 	proxy2.notefield[1]:x(sw/2)
 	proxy2.notefield[2]:x(sw/2)
+	proxy2.notefield[1]:hidden(1)
+	proxy2.notefield[2]:hidden(1)
+
+	--proxy.notefield[3]:hidden(1)
 	
 end)"
 Type = "ActorFrame"

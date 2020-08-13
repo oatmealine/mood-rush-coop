@@ -598,6 +598,15 @@
 	ease {370.5 - 0.5, 0.5 * 2, inOutCirc, 200, 'tipsy', 0, 'rotationz'}
 	ease {371.5 - 0.5, 0.5 * 2, inOutCirc, 0, 'tipsy'}
 
+	func {250, function()
+		proxy2.notefield[1]:hidden(0)
+		proxy2.notefield[2]:hidden(0)
+	end}
+	func {268, function()
+		proxy2.notefield[1]:hidden(1)
+		proxy2.notefield[2]:hidden(1)
+	end}
+
 	spellcard {176, 212, color = {.2, 0, .7, 1}, name = 'glitch2.frag and RotationY in The Adventure For Readability'}
 	spellcard {212, 240, color = {.1, 0, .9, 1}, name = 'RotationY\'s unwanted twin brother'}
 	spellcard {252, 274, color = {.6, 0, .4, 1}, name = 'Wake Up 2'}
