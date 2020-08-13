@@ -552,6 +552,52 @@
 
 	func {340, disableVert}
 
+	alias {'fakeblacksphere'}
+	alias {'fakeblacksphererot'}
+	func {340, 9e9, function(beat, poptions)
+		for pn = 1, 4 do
+			local defangle = poptions[pn].fakeblacksphererot / 100 * 360 + 180
+
+			for c = 0, 3 do
+				local angle = defangle
+				if c % 2 == 0 then angle = angle + 180 end
+				local off = (c % 2) * 2 - 1
+
+				local val = poptions[pn].fakeblacksphere / 100 * 50
+
+				local x = math.sin(math.rad(angle)) * val - val * off
+				local y = math.cos(math.rad(angle)) * val
+
+				poptions[pn]['movex' .. c] = x
+				poptions[pn]['movey' .. c] = y
+			end
+		end
+	end}
+
+	ease {340, 1, inOutSine, 100, 'fakeblacksphere'}
+	ease {340, 347-340, linear, 300, 'fakeblacksphererot'}
+	ease {347, 1, outSine, 250, 'fakeblacksphererot'}
+	ease {348, 354-348, linear, 550, 'fakeblacksphererot'}
+	ease {353.5, 1, inOutSine, 500, 'fakeblacksphererot'}
+	ease {354.5, 1, inOutSine, 600, 'fakeblacksphererot'}
+	ease {355.5, 1, inOutSine, 550, 'fakeblacksphererot'}
+	ease {356, 364-356, linear, 200, 'fakeblacksphererot'}
+
+	ease {364, 1, outSine, 150, 'fakeblacksphererot'}
+	ease {365, 1, outSine, 100, 'fakeblacksphererot'}
+	ease {366, 1, outSine, 50, 'fakeblacksphererot'}
+	ease {367, 1, outSine, 0, 'fakeblacksphererot'}
+
+	ease {368, 1, outSine, 0, 'fakeblacksphere'}
+
+	ease {367, 2/3 * 2, inOutCirc, -200, 'tipsy'}
+	ease {368 - 2/3, 2/3 * 2, inOutCirc, 200, 'tipsy'}
+	ease {368, 2/3 * 2, inOutCirc, -200, 'tipsy'}
+	ease {369.5 - 0.5, 0.5 * 2, inOutCirc, 150, 'tipsy', 10, 'rotationz'}
+	ease {370 - 0.5, 0.5 * 2, inOutCirc, -200, 'tipsy', -5, 'rotationz'}
+	ease {370.5 - 0.5, 0.5 * 2, inOutCirc, 200, 'tipsy', 0, 'rotationz'}
+	ease {371.5 - 0.5, 0.5 * 2, inOutCirc, 0, 'tipsy'}
+
 	spellcard {176, 212, color = {.2, 0, .7, 1}, name = 'glitch2.frag and RotationY in The Adventure For Readability'}
 	spellcard {212, 240, color = {.1, 0, .9, 1}, name = 'RotationY\'s unwanted twin brother'}
 	spellcard {252, 274, color = {.6, 0, .4, 1}, name = 'Wake Up 2'}
