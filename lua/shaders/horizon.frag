@@ -16,9 +16,16 @@ vec2 img2tex( vec2 v ) { return clamp(v, 0.0 + 1.0 / imageSize.x, 1.0 - 1.0 / im
 uniform sampler2D sampler0;
 #define saturate(i) clamp(i,0.,1.)
 
-float noise( float _i ) {
-	return fract( sin( _i * 3287.5456 + 92.44 ) * 32.45344 );
+float noise( float x ) {
+	return fract( sin( x * 3287.0 + 92.0 ) * 325.0 );
 }
+
+// this isnt floor, this is trunc but i dont think glsl has trunc so
+float cheapFloor(float x) {return x - fract(x); }
+
+// this isnt even sin. this is a fucking ZIG ZAG
+// this is the levels of "cheap" we're on
+float cheapSin(float x) {return abs(mod(x, 2.0) - 1) * 2.0 - 1.0; }
 
 void main (void)
 {
@@ -27,15 +34,15 @@ void main (void)
   float timer = time;
 
 	float phaseY = uv.y * 1000.0 + timer * 10.0;
-	float phaseOut = noise( floor( ( phaseY + ( 2.0 + sin( phaseY * 0.1 ) ) * noise( timer ) * 20.0 ) * 0.07 + noise( floor( phaseY * 1.1 ) ) ) );
-  float phase3 = phaseOut * 182.43 + floor( timer * 30.0 ) / 3.0 * 0.1;
+	float phaseOut = noise( cheapFloor( ( phaseY + ( 2.0 ) * noise( timer ) * 20.0 ) * 0.07 + noise( cheapFloor( phaseY * 1.1 ) ) ) );
+  float phase3 = phaseOut * 182.43 + cheapFloor( timer * 30.0 ) / 3.0 * 0.1;
 
-  float amp2 = amp * ( 1.0 + 40.0 * pow( abs( uv.y * 2.0 - 1.0 ), 120.0 ) );
+  float amp2 = amp * ( 1.0 + 40.0 * pow(noise(uv.y + timer), 2.0) );
 
   vec3 glitchUvx = vec3(
-		uv.x+( 0.4 * sin( phase3 ) ) * amp2,
-		uv.x+( 0.4 * sin( phase3 + 0.4 ) ) * amp2,
-		uv.x+( 0.4 * sin( phase3 + 0.8 ) ) * amp2
+		uv.x+( 0.4 * cheapSin( phase3 ) ) * amp2,
+		uv.x+( 0.4 * cheapSin( phase3 + 0.4 ) ) * amp2,
+		uv.x+( 0.4 * cheapSin( phase3 + 0.8 ) ) * amp2
 	);
 
   gl_FragColor = vec4(saturate( vec3(
