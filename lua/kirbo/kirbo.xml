@@ -63,10 +63,16 @@
 	-- haha point one
 	{36.1, 0, instant, 0, 'stealth', 0, 'dark', 0, 'flip', 0, 'movex0', 0, 'movey1', 0, 'movey2', 0, 'movex3', 0, 'reverse2', 0, 'spiralholds'}
 	
+	{42.5, 1, bounce, 2, 'stretchy'}
+	
+	{50.5, 1, bounce, 2, 'stretchx'}
+	
 	{63, 0, instant, 0, 'hide', plr = {1, 2}}
 	
 	{65, 2, linear, 1337, 'movex1', 1337, 'movex3', plr = 1}
 	{65, 2, linear, -1337, 'movex0', -1337, 'movex2', plr = 2}
+	
+	{96, 0, instant, 0, 'movex0', 0, 'movex1', 0, 'movex2', 0, 'movex3'}
 	
 	{100, 3, outQuad, 500, 'drunk', 500, 'tipsy', 100, 'stealth', 75, 'dark', 100, 'confusion', plr = 1}
 	{100, 3, outQuad, -500, 'drunk', -500, 'tipsy', 100, 'stealth', 75, 'dark', -100, 'confusion', plr = 2}
@@ -138,6 +144,13 @@
 	wiggle(116, 172-116, 8, outQuad, -15, 'rotationx')
 	
 	wiggle0(116, 172-116, 16, inQuad, -15, 'zoom')
+	
+	switcheroo(96, .5, outExpo, 'flip')
+	
+	switcheroo(97, .5, outExpo, 'invert')
+	switcheroo(97.5, .5, outExpo, 'urld')
+	switcheroo(98, .5, outExpo, 'ludr')
+	switcheroo(98.5, .5, outExpo, 'reset')
 	
 	for beat=2,4,.125 do
 		add{beat, 0, instant, 50/17, 'flip', 100/17, 'centered', -100/17, 'movex0', 100/17, 'movey1', -100/17, 'movey2', 100/17, 'movex3', 100/17, 'reverse2', 600/17, 'dpad_setup', -.55/17, 'xmod'}
@@ -302,7 +315,7 @@
 			mods[pn].invert = -math.cos(beat*math.pi) * 50 + 50
 		end
 	end}
-	{64, function(beat)
+	{65, function(beat)
 		for pn = 1, 2 do
 			proxy.notefield[pn]:stopeffect()
 		end
@@ -328,7 +341,7 @@
 			proxy.notefield[2]:effectperiod(2)
 		end
 	end}
-	{74.5, function(beat)
+	{74, function(beat)
 		for pn = 1, 2 do
 			proxy.notefield[pn]:stopeffect()
 		end
@@ -452,11 +465,24 @@
 		fuck_horizon:GetShader():uniform1f('amp', percent)
 	end)
 	
+	alias('stretchx', function(percent)
+		local screen = SCREENMAN:GetTopScreen();
+		screen:x(-scx*percent)
+		screen:zoomx(percent + 1)
+	end)
+	
+	alias('stretchy', function(percent)
+		local screen = SCREENMAN:GetTopScreen();
+		screen:y(-scy*percent)
+		screen:zoomy(percent + 1)
+	end)
+	
 	
 	-- spellcard {beat, length, color = {r, g, b, a}, name = name, difficulty = diffnum [, mode = 'end']}
 	-- let's you add spellcards to a chart.
 	-- `color`, `name`, and `difficulty` are all optional.
 	spellcard{0, 28, color = {.5, 0, 0, 1}, name = 'did anyone order a d-pad?'}
+	spellcard{36, 96, color = {0, 1, 0, 1}, name = 'lesson learned, dont fuck with the baddest', mode = 'end'}
 	spellcard{100, 176, color = {.75, 0, 0, 1}, name = 'sike, have another d-pad', mode = 'end'}
 	spellcard{372, 400, color = {1, 0, 0, 1}, name = 'd-pad, electric tripleloo', mode = 'end'}
 	spellcard{402, 404, color = {0, 0, 1, 1}, name = 'yeah, hit that quad, its good', mode = 'end'}
