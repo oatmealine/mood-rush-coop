@@ -37,8 +37,6 @@
 	proxy2.notefield[1]:hidden(1)
 	proxy2.notefield[2]:hidden(1)
 
-	--proxy.notefield[3]:hidden(1)
-	
 end)"
 Type = "ActorFrame"
 ><children>
@@ -59,6 +57,7 @@ Type = "ActorFrame"
 		self:zoomto(SCREEN_WIDTH, SCREEN_HEIGHT)
 	end"/>
 
+	<Layer Type="Sprite" Frag="shaders/glitch2lumi.frag" InitCommand = "%xero.sprite" Name = "oat_aftspritebehind" />
 
 	<Layer Type = "ActorProxy" Name = "proxy.notefield[1]" />
 	<Layer Type = "ActorProxy" Name = "proxy.notefield[2]" />

@@ -28,6 +28,9 @@
 	oat_partsaftspritebehind:SetTexture(oat_postaft:GetTexture())
 	oat_partsaftspritebehind:diffuse(0.9, 0, 0, 1)
 
+	oat_aftspritebehind:SetTexture(oat_postaft:GetTexture())
+	oat_aftspritebehind:diffusealpha(0.8)
+
 	for i,v in ipairs(oat_partsaftsprite) do
 		v:xy(scx, scy)
 		--v:zoomto(sw, sh)
@@ -192,10 +195,14 @@
 	end}
 
 	alias {'glitch2', function(a)
-		oat_postsprite:GetShader():uniform1f('amount', a)
+		oat_postsprite:GetShader():uniform1f('amount', a / 2)
+		oat_aftspritebehind:GetShader():uniform1f('amount', a)
+		oat_aftspritebehind:diffusealpha(math.max(math.min(a * 10, 0.9), 0.0))
 	end}
 
 	-- The Real wenis times
+
+	set {0, 0, 'glitch2'}
 
 	func {178, disableVert}
 	func {179, wrap(enableRandVert({1}))}
