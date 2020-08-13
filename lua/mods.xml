@@ -52,7 +52,7 @@ Type = "ActorFrame"
 
 	<Layer Type="ActorFrameTexture" InitCommand = "%xero.aft" Name = "oat_screenplayeraft" />
 	
-	<Layer File="white" InitCommand="%function(self)
+	<Layer File="white" Frag="shaders/bg.frag" InitCommand="%function(self)
 		self:xy(SCREEN_CENTER_X, SCREEN_CENTER_Y)
 		self:zoomto(SCREEN_WIDTH, SCREEN_HEIGHT)
 	end"/>
@@ -318,6 +318,11 @@ Type = "ActorFrame"
 		InitCommand = "%xero.aft" 
 		Name = "fuck_aft" 
 	/>
+
+	<Layer File="white" InitCommand="%function(self)
+		self:xy(SCREEN_CENTER_X, SCREEN_CENTER_Y)
+		self:zoomto(SCREEN_WIDTH, SCREEN_HEIGHT)
+	end"/>
 
 	<Layer 
 		Type = "Sprite"

@@ -212,6 +212,7 @@
 	end}
 	func {340, function()
 		oat_postsprite:hidden(1)
+		fuck_post:diffusealpha(1)
 	end}
 
 	ease {179, 1, outCirc, 90, 'stealth', -60, 'flip', 200, 'drunky', 400, 'tipsy', 700, 'drunk', 500, 'drunkz', 500, 'bumpyx', 100, 'dark', 100, 'boomerang', -100, 'zoom', 100, 'hidenoteflashes', plr = 2}
@@ -316,6 +317,46 @@
 	ease {266 + 2/3, 0.4, outCirc, 0, 'reverse'}
 
 	ease {267, 1, bounce, -5000, 'tiny'}
+
+	ease {65, 2.5, bounce, 200, 'tanbumpy', 200, 'tanbumpyx', 200, 'tantipsy', 200, 'tanbumpyy', -90, 'bumpyxperiod', 200, 'bumpyxperiod', -1000, 'tiny'}
+
+	ease {75 - .5, 1, inOutCirc, 100, 'reverse', 100, 'invert'}
+	ease {75.5 - .5, 1, inOutCirc, 0, 'reverse', 0, 'invert'}
+
+	for _,b in ipairs({80, 80.75, 81.5, 82}) do
+		func {b - .01, function()
+			fuck_aft:hidden(1)
+
+			fuck_horizon:rotationz(math.random(-20, 20))
+			fuck_horizon:rotationx(math.random(-20, 20))
+			fuck_horizon:rotationy(math.random(-20, 20))
+			fuck_horizon:zoom(math.random(80, 100) / 100)
+		end}
+		func {b - .1, function()
+			fuck_aft:hidden(0)
+		end}
+	end
+
+	func {82, function()
+		fuck_aft:hidden(0)
+		fuck_horizon:rotationz(0)
+		fuck_horizon:rotationx(0)
+		fuck_horizon:rotationy(0)
+		fuck_horizon:zoom(1)
+	end}
+
+	ease {82, 2, inOutCirc, 100, 'reverse'}
+
+	ease {100, 4, inOutCirc, 0, 'reverse'}
+
+	for b = 68, 96 do
+		local off = (b % 2) * 2 - 1
+
+		ease {b - .5, 1, inOutCirc, 40 * off, 'rotationx', confOff(-40 * off), 'confusionxoffset', plr = 2}
+		ease {b - .5, 1, inOutCirc, -40 * off, 'rotationx', confOff(40 * off), 'confusionxoffset', plr = 1}
+	end
+
+	ease {96, 1, outCirc, 0, 'rotationx', 0, 'confusionxoffset'}
 
 	func {267.5, function()
 		for i,aft in ipairs(oat_screenplayeraftsprite) do
