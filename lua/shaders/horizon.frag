@@ -13,7 +13,7 @@ uniform vec2 imageSize;
 
 vec2 texCoord2imgCoord( vec2 uv )
 {
-  return uv / textureSize * imageSize;
+  return fract(uv) / textureSize * imageSize;
 }
 
 uniform sampler2D sampler0;

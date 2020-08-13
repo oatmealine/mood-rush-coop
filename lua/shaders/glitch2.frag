@@ -16,7 +16,7 @@ uniform sampler2D sampler0;
 
 uniform float amount = 0.0;
 
-vec2 img2tex( vec2 v ) { return v / textureSize * imageSize; }
+vec2 img2tex( vec2 v ) { return fract(v) / textureSize * imageSize; }
 
 float sat( float t ) {
 	return clamp( t, 0.0, 1.0 );
