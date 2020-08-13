@@ -14,8 +14,8 @@ uniform float time;
 uniform float glitchAmp = 0.0;
 uniform float hnoise = 0.0;
 
-bool isValidUV( vec2 v ) { return 0.0 < v.x && v.x < 1.0 && 0.0 < v.y && v.y < 1.0; }
-vec2 img2tex( vec2 v ) { return fract(v) / textureSize * imageSize; }
+bool isValidUV( vec2 v ) { return true; }
+vec2 img2tex( vec2 v ) { return clamp(v, 0.0 + 1.0 / imageSize.x, 1.0 - 1.0 / imageSize.x) / textureSize * imageSize; }
 
 vec3 rgb2yiq( vec3 rgb ) {
   return mat3( 0.299, 0.596, 0.211, 0.587, -0.274, -0.523, 0.114, -0.322, 0.312 ) * rgb;

@@ -7,7 +7,7 @@ uniform vec2 textureSize;
 uniform vec2 imageSize;
 uniform sampler2D sampler0;
 
-vec2 img2tex( vec2 v ) { return fract(v) / textureSize * imageSize; }
+vec2 img2tex( vec2 v ) { return clamp(v, 0.0 + 1.0 / imageSize.x, 1.0 - 1.0 / imageSize.x) / textureSize * imageSize; }
 
 void main()
 {

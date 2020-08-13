@@ -11,7 +11,7 @@ uniform float time;
 
 uniform float amp = 0.02;
 
-vec2 img2tex( vec2 v ) { return fract(v) / textureSize * imageSize; }
+vec2 img2tex( vec2 v ) { return clamp(v, 0.0 + 1.0 / imageSize.x, 1.0 - 1.0 / imageSize.x) / textureSize * imageSize; }
 
 float rand( vec2 n ) {
   return fract(sin(dot(n.xy, vec2(12.9898, 78.233)))* 43758.5453);

@@ -11,10 +11,7 @@ varying vec4 color;
 uniform vec2 textureSize;
 uniform vec2 imageSize;
 
-vec2 texCoord2imgCoord( vec2 uv )
-{
-  return fract(uv) / textureSize * imageSize;
-}
+vec2 img2tex( vec2 v ) { return clamp(v, 0.0 + 1.0 / imageSize.x, 1.0 - 1.0 / imageSize.x) / textureSize * imageSize; }
 
 uniform sampler2D sampler0;
 #define saturate(i) clamp(i,0.,1.)
@@ -36,15 +33,15 @@ void main (void)
   float amp2 = amp * ( 1.0 + 40.0 * pow( abs( uv.y * 2.0 - 1.0 ), 120.0 ) );
 
   vec3 glitchUvx = vec3(
-		fract( uv.x+( 0.4 * sin( phase3 ) ) * amp2 ),
-		fract( uv.x+( 0.4 * sin( phase3 + 0.4 ) ) * amp2 ),
-		fract( uv.x+( 0.4 * sin( phase3 + 0.8 ) ) * amp2 )
+		uv.x+( 0.4 * sin( phase3 ) ) * amp2,
+		uv.x+( 0.4 * sin( phase3 + 0.4 ) ) * amp2,
+		uv.x+( 0.4 * sin( phase3 + 0.8 ) ) * amp2
 	);
 
   gl_FragColor = vec4(saturate( vec3(
-  	texture2D( sampler0, texCoord2imgCoord(vec2( glitchUvx.x, uv.y )) ).x,
-  	texture2D( sampler0, texCoord2imgCoord(vec2( glitchUvx.y, uv.y )) ).y,
-  	texture2D( sampler0, texCoord2imgCoord(vec2( glitchUvx.z, uv.y )) ).z
+  	texture2D( sampler0, img2tex(vec2( glitchUvx.x, uv.y )) ).x,
+  	texture2D( sampler0, img2tex(vec2( glitchUvx.y, uv.y )) ).y,
+  	texture2D( sampler0, img2tex(vec2( glitchUvx.z, uv.y )) ).z
   ) ), 1)*color;
   
 }
