@@ -29,7 +29,7 @@
 	oat_partsaftspritebehind:diffuse(0.9, 0, 0, 1)
 
 	oat_aftspritebehind:SetTexture(oat_postaft:GetTexture())
-	oat_aftspritebehind:diffusealpha(0.8)
+	oat_aftspritebehind:diffusealpha(0)
 
 	for i,v in ipairs(oat_partsaftsprite) do
 		v:xy(scx, scy)
@@ -440,6 +440,15 @@
 
 	ease {290, 2, outCirc, 0, 'rotationx', 0, 'confusionxoffset', plr = 1}
 	ease {290, 2, outCirc, 180, 'rotationx', confOff(-180), 'confusionxoffset', 90, 'y', plr = 2}
+
+	ease {290, 1.5, linear, 1, function(a)
+		oat_aftspritebehind:diffusealpha(1)
+		oat_aftspritebehind:GetShader():uniform1f('amount', 0.01)
+	end}
+	ease {291.5, 1, inSine, 1, function(a)
+		oat_aftspritebehind:diffusealpha(1 - a)
+		oat_aftspritebehind:GetShader():uniform1f('amount', 0.01)
+	end}
 
 	ease {302, 2, outCirc, 0, 'rotationx', 0, 'confusionxoffset', -90, 'y', plr = 2}
 	ease {302, 2, bounce, -1500, 'tiny'}

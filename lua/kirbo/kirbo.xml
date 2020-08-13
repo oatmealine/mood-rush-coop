@@ -484,6 +484,10 @@
 	
 	alias('brrr', function(percent)
 		fuck_horizon:GetShader():uniform1f('amp', percent)
+
+		-- hi
+		oat_aftspritebehind:GetShader():uniform1f('amount', percent)
+		oat_aftspritebehind:diffusealpha(math.max(math.min(percent * 9, 0.9), 0.0))
 	end)
 	
 	alias('stretchx', function(percent)
