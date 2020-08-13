@@ -343,6 +343,20 @@ Type = "ActorFrame"
 		HidePostMessageCommand="diffusealpha,0"
 		ShowPostMessageCommand="diffusealpha,1"
 	/>
+	
+	<Layer 
+		Type = "Sprite"
+		Frag = "shaders/horizon.frag"
+		InitCommand = "%xero.sprite" 
+		Name = "fuck_horizon" 
+		OnCommand="%function(self) 
+			xero()
+			self:SetTexture(fuck_aft:GetTexture())
+			self:diffusealpha(0)
+		end"
+		HideHoriMessageCommand="diffusealpha,0"
+		ShowHoriMessageCommand="diffusealpha,1"
+	/>
 
 	<Layer 
 		Type = "Sprite"

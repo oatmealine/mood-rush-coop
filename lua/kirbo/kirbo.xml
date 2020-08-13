@@ -61,7 +61,12 @@
 	{32, 0, instant, 0, 'dpad_setup', 0, 'rotationz', 0, 'confusionoffset', 100, 'zoomz', 100, 'zoom', 0, 'longholds', 0, 'nyoom'}
 	
 	-- haha point one
-	{36.1, 0, instant, 0, 'stealth', 0, 'dark', 0, 'flip', 0, 'centered', 0, 'movex0', 0, 'movey1', 0, 'movey2', 0, 'movex3', 0, 'reverse2', 0, 'spiralholds'}
+	{36.1, 0, instant, 0, 'stealth', 0, 'dark', 0, 'flip', 0, 'movex0', 0, 'movey1', 0, 'movey2', 0, 'movex3', 0, 'reverse2', 0, 'spiralholds'}
+	
+	{63, 0, instant, 0, 'hide', plr = {1, 2}}
+	
+	{65, 2, linear, 1337, 'movex1', 1337, 'movex3', plr = 1}
+	{65, 2, linear, -1337, 'movex0', -1337, 'movex2', plr = 2}
 	
 	{100, 3, outQuad, 500, 'drunk', 500, 'tipsy', 100, 'stealth', 75, 'dark', 100, 'confusion', plr = 1}
 	{100, 3, outQuad, -500, 'drunk', -500, 'tipsy', 100, 'stealth', 75, 'dark', -100, 'confusion', plr = 2}
@@ -110,6 +115,9 @@
 	
 	{236, 4, outQuad, 0, 'flip'}
 	
+	{340, 0, instant, 200, 'tiny1', 200, 'tiny3', plr = 1}
+	{340, 0, instant, 200, 'tiny0', 200, 'tiny2', plr = 2}
+	
 	{370, 0, instant, 300, 'drawsize', 50, 'shrinklineary'}
 	
 	{372, 400, linear, 90*(400-372), 'rotationy', mode = 'end'}
@@ -138,6 +146,13 @@
 	
 	for beat=34,36,.25 do
 		add{beat, 0, instant, (sw/4)/8, 'moveVal', -50/9, 'flip', -100/9, 'centered', 100/9, 'movex0', -100/9, 'movey1', 100/9, 'movey2', -100/9, 'movex3', -100/9, 'reverse2', .5/9, 'xmod'}
+	end
+	
+	for beat=36,62,1 do
+		local plr = math.mod(beat, 2) + 1
+		local plr2 = math.mod(beat - 1, 2) + 1
+		m_ea{beat, 0, instant, 100, 'hide', plr = plr}
+		{beat, 0, instant, 0, 'hide', plr = plr2}
 	end
 	
 	for beat=102,115,.25 do
@@ -176,6 +191,19 @@
 			local column = math.mod(beat * 4, 4)
 			m_ea{beat, 1, kick(6), 65, 'arrowpath'..column..''}
 			-- print(column)
+		end
+	end
+	
+	for i = 1,table.getn(fuck_brrahh) do
+		local beat = fuck_brrahh[i]
+		m_ea{beat[1], 1, kick(8), -600, 'tiny', .5, 'brrr'}
+	end
+	
+	local fuck_boop = {{340, 346}, {348, 353}, {356, 371}}
+	
+	for i,v in pairs(fuck_boop) do
+		for beat=v[1],v[2] do
+			m_ea{beat, 1, kick(6), -300, 'tiny'}
 		end
 	end
 	
@@ -237,13 +265,116 @@
 			P[2]:x(scx + mods[2].moveVal)
 		end
 	end}
-	{100, function(beat)
-		for pn = 1, max_pn do
-	        P[pn]:linear(5)
-	        P[pn]:x(scx)
-	    end
+	{36, function(beat)
+		for pn = 1, 2 do
+			proxy.notefield[pn]:pulse()
+			proxy.notefield[pn]:effectmagnitude(0, 1.25, 0)
+			proxy.notefield[pn]:effectclock('bgm')
+			proxy.notefield[pn]:effectperiod(1)
+		end
 		
 		MESSAGEMAN:Broadcast('HideEye')
+		MESSAGEMAN:Broadcast('ShowHori')
+	end}
+	{49, function(beat)
+		for pn = 1, 2 do
+			P[pn]:x(scx)
+			proxy.notefield[pn]:effectperiod(.5)
+		end
+	end}
+	{50, function(beat)
+		for pn = 1, 2 do
+			proxy.notefield[pn]:effectperiod(1)
+		end
+		
+		if P[1] then
+			P[1]:x(sw/4)
+		end
+		
+		if P[2] then
+			P[2]:x(sw*3/4)
+		end
+	end}
+	{60, 4, function(beat, mods)
+		for pn = 1, 2 do
+			mods[pn].alternate = math.sin(beat*math.pi) * 20
+			mods[pn].reverse = math.sin(beat*math.pi) * -10
+			mods[pn].invert = -math.cos(beat*math.pi) * 50 + 50
+		end
+	end}
+	{64, function(beat)
+		for pn = 1, 2 do
+			proxy.notefield[pn]:stopeffect()
+		end
+	end}
+	{65, function(beat)
+		for pn = 1, max_pn do
+	        P[pn]:linear(.5)
+	        P[pn]:x(scx)
+	    end
+	end}
+	{68, function(beat)
+		if proxy.notefield[1] then
+			proxy.notefield[1]:bob()
+			proxy.notefield[1]:effectmagnitude(0, 0, 420)
+			proxy.notefield[1]:effectclock('bgm')
+			proxy.notefield[1]:effectperiod(2)
+		end
+		
+		if proxy.notefield[2] then
+			proxy.notefield[2]:bob()
+			proxy.notefield[2]:effectmagnitude(0, 0, -420)
+			proxy.notefield[2]:effectclock('bgm')
+			proxy.notefield[2]:effectperiod(2)
+		end
+	end}
+	{74.5, function(beat)
+		for pn = 1, 2 do
+			proxy.notefield[pn]:stopeffect()
+		end
+	end}
+	{76, function(beat)
+		if proxy.notefield[1] then
+			proxy.notefield[1]:bob()
+			proxy.notefield[1]:effectmagnitude(0, 0, -420)
+			proxy.notefield[1]:effectclock('bgm')
+			proxy.notefield[1]:effectperiod(2)
+		end
+		
+		if proxy.notefield[2] then
+			proxy.notefield[2]:bob()
+			proxy.notefield[2]:effectmagnitude(0, 0, 420)
+			proxy.notefield[2]:effectclock('bgm')
+			proxy.notefield[2]:effectperiod(2)
+		end
+	end}
+	{82, function(beat)
+		for pn = 1, 2 do
+			proxy.notefield[pn]:stopeffect()
+		end
+	end}
+	{84, function(beat)
+		if proxy.notefield[1] then
+			proxy.notefield[1]:bob()
+			proxy.notefield[1]:effectmagnitude(0, 0, 420)
+			proxy.notefield[1]:effectclock('bgm')
+			proxy.notefield[1]:effectperiod(2)
+		end
+		
+		if proxy.notefield[2] then
+			proxy.notefield[2]:bob()
+			proxy.notefield[2]:effectmagnitude(0, 0, -420)
+			proxy.notefield[2]:effectclock('bgm')
+			proxy.notefield[2]:effectperiod(2)
+		end
+	end}
+	{96, function(beat)
+		for pn = 1, 2 do
+			proxy.notefield[pn]:stopeffect()
+		end
+	end}
+	{100, function(beat)		
+		MESSAGEMAN:Broadcast('HideHori')
 		MESSAGEMAN:Broadcast('ShowPost')
 	end}
 	{116, 172, function(beat, mods)	
@@ -315,6 +446,10 @@
 	alias('noize', function(percent)
 		fuck_post:GetShader():uniform1f('glitchAmp', percent/5)
 		fuck_post:GetShader():uniform1f('hnoise', percent/5)
+	end)
+	
+	alias('brrr', function(percent)
+		fuck_horizon:GetShader():uniform1f('amp', percent)
 	end)
 	
 	
