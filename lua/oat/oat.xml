@@ -42,7 +42,7 @@
 		local vni = math.floor(ni/24)
 
 		local inv = 1/12
-		local vinv = (1/12) * (4/3)
+		local vinv = (1/12) * (sw/sh)
 
 		local size = sw/12
 
@@ -688,6 +688,7 @@
 	spellcard {274, 276, color = {.5, .5, .5, 1}, name = 'lets go'}
 	spellcard {276, 304, color = {.7, 0, 0, 1}, name = 'Heard ya liked Finorza'}
 	spellcard {304, 340, color = {.9, 0, 0, 1}, name = 'Dial-Up Screaming'}
+	spellcard {340, 372, color = {.6, .2, .9, 1}, name = 'Revert \34Revert \34Revert \34Revert \34Revert \34Revert \34recycling proxies be liek\34\34\34'}
 
 end)"
 	Type = "ActorFrame"
