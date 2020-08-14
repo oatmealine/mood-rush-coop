@@ -52,6 +52,11 @@ Type = "ActorFrame"
 
 	<Layer Type="ActorFrameTexture" InitCommand = "%xero.aft" Name = "oat_screenplayeraft" />
 	
+	<Layer File="white" InitCommand="%function(self)
+		self:xy(SCREEN_CENTER_X, SCREEN_CENTER_Y)
+		self:zoomto(SCREEN_WIDTH, SCREEN_HEIGHT)
+		self:clearzbuffer(1)
+	end"/>
 	<Layer File="white" Name="oat_bg" Frag="shaders/bg.frag" InitCommand="%function(self)
 		self:xy(SCREEN_CENTER_X, SCREEN_CENTER_Y)
 		self:zoomto(SCREEN_WIDTH, SCREEN_HEIGHT)
