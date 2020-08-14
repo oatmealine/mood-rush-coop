@@ -417,10 +417,10 @@
 			end
 			
 			for px = 1, 2 do
-				proxy2.notefield[pn]:hidden(0)
-				proxy2.notefield[pn]:xy(sw/2, sh * 1.25 - 30)
-				proxy2.notefield[pn]:rotationx(180 * (3 * px - pn) / px)
-				proxy2.notefield[pn]:rotationz(10 * sideSign)
+				proxy3.notefield[pn]:hidden(0)
+				proxy3.notefield[pn]:xy(sw/2, sh * 1.25 - 30)
+				proxy3.notefield[pn]:rotationx(180 * (3 * px - pn) / px)
+				proxy3.notefield[pn]:rotationz(10 * sideSign)
 			end
 	    end
 	end}
@@ -431,7 +431,7 @@
 			proxy.notefield[pn]:rotationx(0)
 			proxy.notefield[pn]:rotationz(0)
 			
-			proxy2.notefield[pn]:hidden(1)
+			proxy3.notefield[pn]:hidden(1)
 	    end
 	end}
 	{372, function(beat)

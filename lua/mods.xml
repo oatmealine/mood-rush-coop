@@ -16,6 +16,7 @@
 		end
 		temp(proxy.notefield[pn], P[pn]:GetChild'NoteField')
 		temp(proxy2.notefield[pn], P[pn]:GetChild'NoteField')
+		temp(proxy3.notefield[pn], P[pn]:GetChild'NoteField')
 		temp(proxy.judge[pn], P[pn]:GetChild'Judgment')
 		temp(proxy.combo[pn], P[pn]:GetChild'Combo')
 		
@@ -36,6 +37,9 @@
 	proxy2.notefield[2]:x(sw/2)
 	proxy2.notefield[1]:hidden(1)
 	proxy2.notefield[2]:hidden(1)
+	
+	proxy3.notefield[1]:hidden(1)
+	proxy3.notefield[2]:hidden(1)
 
 end)"
 Type = "ActorFrame"
@@ -67,6 +71,9 @@ Type = "ActorFrame"
 	<Layer Type = "ActorProxy" Name = "proxy.notefield[1]" />
 	<Layer Type = "ActorProxy" Name = "proxy.notefield[2]" />
 	<Layer Type = "ActorProxy" Name = "proxy.notefield[3]" />
+	
+	<Layer Type = "ActorProxy" Name = "proxy3.notefield[1]" />
+	<Layer Type = "ActorProxy" Name = "proxy3.notefield[2]" />
 
 	<!-- for march part -->
 	<Layer Type = "ActorProxy" Name = "oat_proxyMarch[1]" />
