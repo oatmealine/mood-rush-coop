@@ -121,7 +121,7 @@
 	
 	{236, 4, outQuad, 0, 'flip'}
 	
-	{340, 0, instant, -200, 'centered'}
+	{340, 0, instant, -250, 'centered'}
 	{340, 31, linear, 80*31, 'rotationx'}
 	
 	{370, 0, instant, 300, 'drawsize', 50, 'shrinklineary'}
@@ -173,7 +173,7 @@
 	end
 	
 	for beat=370,372,.125 do
-		add{beat, 0, instant, 25/17, 'flip', -25/17, 'invert', -100/17, 'movez1', 100/17, 'movez2', 7/17, 'xmod', 160/17, 'mini', -2570/17, 'rotationx', 157/17, 'confusionxoffset', 200/17, 'centered'}
+		add{beat, 0, instant, 25/17, 'flip', -25/17, 'invert', -100/17, 'movez1', 100/17, 'movez2', 7/17, 'xmod', 160/17, 'mini', -2570/17, 'rotationx', 157/17, 'confusionxoffset', 250/17, 'centered'}
 		-- print(beat)
 	end
 	
