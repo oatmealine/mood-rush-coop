@@ -213,6 +213,8 @@
 	func {178, disableVert}
 	func {179, wrap(enableRandVert({1}))}
 
+	set {180, 0.1, 'glitch2'}
+
 	func {180, function()
 		oat_postsprite:hidden(0)
 	end}
@@ -250,6 +252,7 @@
 
 	ease {240, 3, inSine, 0, 'stealth', 0, 'flip', 0, 'drunky', 0, 'tipsy', 0, 'drunk', 0, 'drunkz', 0, 'bumpyx', 0, 'dark', 0, 'boomerang', 100, 'zoom', 0, 'hidenoteflashes', plr = 2}
 	ease {240, 3, inSine, 0, 'rotationy', 0, 'confusionyoffset', 0, 'flip', 0, 'reverse', 0, 'tipsy', plr = 1}
+	ease {240, 3, inSine, 0, 'glitch2'}
 
 	for i,b in ipairs(funihold) do
 		local xory = ((i % 2) == 0) and 'x' or 'y'
@@ -273,6 +276,8 @@
 	ease {249.833 - 0.5, 0.5 * 2, inOutCirc, -200, 'tipsy', -5, 'rotationz'}
 	ease {250.75 - 0.5, 0.5 * 2, inOutCirc, 0, 'tipsy', 10, 'rotationz', 100, 'reverse'}
 	ease {252 - 0.5, 0.5 * 2, inOutCirc, 0, 'rotationz', 0, 'reverse'}
+
+	set {274, 0.1, 'glitch2'}
 
 	for i,b in ipairs(jump) do
 		local aftNum = ((i - 1) % #oat_screenplayeraftsprite) + 1
@@ -435,7 +440,7 @@
 		for _,v in ipairs(oat_partsaftsprite) do
 			v:rotationz(a * 360)
 		end
-	end}
+	end, 0, 'glitch2'}
 
 
 	-- func {276, wrap(enablePlaystationVert({1, 2}))}
