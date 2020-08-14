@@ -42,7 +42,7 @@
 		local vni = math.floor(ni/24)
 
 		local inv = 1/12
-		local vinv = (1/12) * (4/3)
+		local vinv = (1/12) * (sw/sh)
 
 		local size = sw/12
 
