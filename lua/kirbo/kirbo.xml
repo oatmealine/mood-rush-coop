@@ -209,7 +209,7 @@
 	
 	for i = 1,table.getn(fuck_brrahh) do
 		local beat = fuck_brrahh[i]
-		m_ea{beat[1], 1, kick(8), -600, 'tiny', .5, 'brrr'}
+		m_ea{beat[1], 1, kick(12), -600, 'tiny', .5, 'brrr'}
 	end
 	
 	local fuck_boop = {{340, 346}, {348, 353}, {356, 371}}
@@ -415,6 +415,13 @@
 				proxy.notefield[pn]:rotationx(180 * (2 * px - pn) / px)
 				proxy.notefield[pn]:rotationz(10 * sideSign)
 			end
+			
+			for px = 1, 2 do
+				proxy2.notefield[pn]:hidden(0)
+				proxy2.notefield[pn]:xy(sw/2, sh * 1.25 - 30)
+				proxy2.notefield[pn]:rotationx(180 * (3 * px - pn) / px)
+				proxy2.notefield[pn]:rotationz(10 * sideSign)
+			end
 	    end
 	end}
 	{370, function(beat)
@@ -423,6 +430,8 @@
 			proxy.notefield[pn]:xy(scx, scy)
 			proxy.notefield[pn]:rotationx(0)
 			proxy.notefield[pn]:rotationz(0)
+			
+			proxy2.notefield[pn]:hidden(1)
 	    end
 	end}
 	{372, function(beat)
