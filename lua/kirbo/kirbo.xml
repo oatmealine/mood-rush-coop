@@ -40,7 +40,7 @@
 	
 	plr = {1,2,3}
 	
-	m_ea{0, 0, instant, 100, 'stealth', 360, 'arrowpathdrawsize', 360, 'arrowpathdrawsizeback'}
+	m_ea{0, 0, instant, 100, 'stealth'}
 	{0, 1, outExpo, 100, 'dark', 100, 'halgun'}
 	{0, 1, kick(4), -500, 'tiny'}
 	{0, 0, instant, 100, 'hide', 100, 'hidenoteflash', plr = 3}
@@ -121,7 +121,7 @@
 	
 	{236, 4, outQuad, 0, 'flip'}
 	
-	{340, 0, instant, -250, 'centered'}
+	{340, 0, instant, -250, 'centered', 360, 'arrowpathdrawsize', 360, 'arrowpathdrawsizeback'}
 	{340, 31, linear, 80*31, 'rotationx'}
 	
 	{370, 0, instant, 300, 'drawsize', 50, 'shrinklineary'}
