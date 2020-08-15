@@ -383,6 +383,8 @@ Type = "ActorFrame"
 		Frag = "shaders/glitch2.frag"
 		InitCommand = "%xero.sprite" 
 		Name = "oat_postsprite" 
+		HideOatMessageCommand="hidden,1"
+		ShowOatMessageCommand="hidden,0"
 	/>
 
 	<Layer File = "oat/oat.xml" />

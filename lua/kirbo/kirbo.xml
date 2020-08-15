@@ -18,6 +18,10 @@
 	
 	local function square(t) return t == 1 and 0 or 1 end
 	
+	local function mix(a, b, x)
+		return a * (1 - x) + b * x
+	end
+	
 	local m_ea, mm = ease, func
 	
 	--[[
@@ -216,7 +220,18 @@
 	
 	for i,v in pairs(fuck_boop) do
 		for beat=v[1],v[2] do
-			m_ea{beat, 1, kick(6), -300, 'tiny'}
+			m_ea{beat, 1, kick(6), -300, 'tiny', .75, 'innerOat'}
+			
+			-- funny code oat gave me
+			for i = 0, 3 do
+				local proxT = {proxy, proxy3}
+				local prox = proxT[math.floor(i / 2) % 2 + 1].notefield[i % 2 + 1]
+				local b2 = beat
+
+				m_ea{b2, 1, outCirc, 1, function(a)
+				prox:x(scx + mix(-10, 10, (b2 % 2 == 0) and a or 1 - a))
+				end}
+			end
 		end
 	end
 	
@@ -423,10 +438,12 @@
 				proxy3.notefield[pn]:rotationz(10 * sideSign)
 			end
 	    end
+		
+		MESSAGEMAN:Broadcast('ShowOat')
 	end}
 	{370, function(beat)
 		for pn = 1, 2 do
-			proxy.notefield[pn]:decelerate(.5)
+			proxy.notefield[pn]:decelerate(1)
 			proxy.notefield[pn]:xy(scx, scy)
 			proxy.notefield[pn]:rotationx(0)
 			proxy.notefield[pn]:rotationz(0)
@@ -435,6 +452,7 @@
 	    end
 	end}
 	{372, function(beat)
+		MESSAGEMAN:Broadcast('HideOat')
 		MESSAGEMAN:Broadcast('ShowPost')
 	end}
 	{372, 400, function(beat, mods)	
@@ -509,6 +527,10 @@
 		local screen = SCREENMAN:GetTopScreen();
 		screen:y(-scy*percent)
 		screen:zoomy(percent + 1)
+	end)
+	
+	alias('innerOat', function(percent)
+		oat_postsprite:GetShader():uniform1f('amount', percent)
 	end)
 	
 	
