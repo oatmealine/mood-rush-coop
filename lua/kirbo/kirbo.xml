@@ -229,7 +229,7 @@
 				local b2 = beat
 
 				m_ea{b2, 1, outCirc, 1, function(a)
-				prox:x(scx + mix(-10, 10, (b2 % 2 == 0) and a or 1 - a))
+				prox:x(scx + mix(-sw/50, sw/50, (b2 % 2 == 0) and a or 1 - a))
 				end}
 			end
 		end
