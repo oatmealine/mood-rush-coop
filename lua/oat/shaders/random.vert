@@ -20,13 +20,6 @@ uniform sampler2D samplerRandom;
 uniform float time;
 uniform float ampA;
 uniform float ampB;
-uniform float alpha;
-uniform float stealth;
-
-vec3 hs(vec3 c, float s){
-  vec3 m=vec3(cos(s),s=sin(s)*.5774,-s);
-  return c*mat3(m+=(1.-m.x)/3.,m.zxy,m.yzx);
-}
 
 mat4 inverse( mat4 m )
 {
@@ -77,73 +70,64 @@ void main(){
   //vec3 adder = vec3((SongBeat-fNoteBeat)*10,0,0);
 
   if( iCol == 0 || iCol == 2 ){
-		normal = gl_NormalMatrix * gl_Normal * vec3( 1.0, -1.0, 1.0 );
+  normal = gl_NormalMatrix * gl_Normal * vec3( 1.0, -1.0, 1.0 );
 
-		mat4 mat = modelMatrix; // get model matrix (contains translate, rotate, scale and skew)
-		mat = mat4(
-			length( mat[0].xyz ), 0.0, 0.0, 0.0,
-			0.0, length( mat[1].xyz ), 0.0, 0.0,
-			0.0, 0.0, length( mat[2].xyz ), 0.0,
-			0.0, 0.0, 0.0, 1.0
-		); // extracts 100% organic scaling component from matrix
-		vec4 vert = mat * vec4( gl_Vertex.xyz, 1.0 ); // get vertex data and apply the matrix
-		vec3 addv = ( texture2D(
-			samplerRandom,
-			mod( vert.xy * 0.01, 1.0 ) ).xyz - 0.5
-		) * 300.0; // generate some random shit based from position of vertices
+  mat4 mat = modelMatrix; // get model matrix (contains translate, rotate, scale and skew)
+  mat = mat4(
+    length( mat[0].xyz ), 0.0, 0.0, 0.0,
+    0.0, length( mat[1].xyz ), 0.0, 0.0,
+    0.0, 0.0, length( mat[2].xyz ), 0.0,
+    0.0, 0.0, 0.0, 1.0
+  ); // extracts 100% organic scaling component from matrix
+  vec4 vert = mat * vec4( gl_Vertex.xyz, 1.0 ); // get vertex data and apply the matrix
+  vec3 addv = ( texture2D(
+    samplerRandom,
+    mod( vert.xy * 0.01, 1.0 ) ).xyz - 0.5
+  ) * 300.0; // generate some random shit based from position of vertices
 
-		addv.yz = rotate2D( time * 4.5 ) * addv.yz; // rotate the random shit
-		addv.zx = rotate2D( time * 3.8 ) * addv.zx; // rotate the random shit
-		vert.xyz += addv * ampA; // add the random shit to vert
-		vert = inverse( mat ) * vert; // back to original state
+  addv.yz = rotate2D( time * 4.5 ) * addv.yz; // rotate the random shit
+  addv.zx = rotate2D( time * 3.8 ) * addv.zx; // rotate the random shit
+  vert.xyz += addv * ampA; // add the random shit to vert
+  vert = inverse( mat ) * vert; // back to original state
 
-		gl_Position = (gl_ModelViewProjectionMatrix * vert);
-		position = vert.xyz;
+  gl_Position = (gl_ModelViewProjectionMatrix * vert);
+  position = vert.xyz;
 
-		gl_TexCoord[0] = (gl_TextureMatrix[0] * gl_MultiTexCoord0 * TextureMatrixScale) + (gl_MultiTexCoord0 * (vec4(1)-TextureMatrixScale));
-		textureCoord = ((gl_TextureMatrix[0] * gl_MultiTexCoord0 * TextureMatrixScale) + (gl_MultiTexCoord0 * (vec4(1)-TextureMatrixScale))).xy;
-		imageCoord = textureCoord * textureSize / imageSize;
+  gl_TexCoord[0] = (gl_TextureMatrix[0] * gl_MultiTexCoord0 * TextureMatrixScale) + (gl_MultiTexCoord0 * (vec4(1)-TextureMatrixScale));
+  textureCoord = ((gl_TextureMatrix[0] * gl_MultiTexCoord0 * TextureMatrixScale) + (gl_MultiTexCoord0 * (vec4(1)-TextureMatrixScale))).xy;
+  imageCoord = textureCoord * textureSize / imageSize;
 
-		vec3 col = gl_Color.rgb;
-		col = hs(col, texture2D(samplerRandom, mod(vec2(time, gl_Vertex.z) * 0.01, 1.0)) * ampA); // fuck it. hue shift
-
-		col = mix(col, vec3(1.0), stealth);
-
-		gl_FrontColor = vec4(col, 1.0 - alpha);
-		color = vec4(col, 1.0 - alpha);
+  gl_FrontColor = gl_Color;
+  color = gl_Color;
   }else{
-		normal = gl_NormalMatrix * gl_Normal * vec3( 1.0, -1.0, 1.0 );
+  normal = gl_NormalMatrix * gl_Normal * vec3( 1.0, -1.0, 1.0 );
 
-		mat4 mat = modelMatrix; // get model matrix (contains translate, rotate, scale and skew)
-		mat = mat4(
-			length( mat[0].xyz ), 0.0, 0.0, 0.0,
-			0.0, length( mat[1].xyz ), 0.0, 0.0,
-			0.0, 0.0, length( mat[2].xyz ), 0.0,
-			0.0, 0.0, 0.0, 1.0
-		); // extracts 100% organic scaling component from matrix
-		vec4 vert = mat * vec4( gl_Vertex.xyz, 1.0 ); // get vertex data and apply the matrix
-		vec3 addv = ( texture2D(
-			samplerRandom,
-			mod( vert.xy * 0.01, 1.0 ) ).xyz - 0.5
-		) * 300.0; // generate some random shit based from position of vertices
-		addv.yz = rotate2D( time * 4.5 ) * addv.yz; // rotate the random shit
-		addv.zx = rotate2D( time * 3.8 ) * addv.zx; // rotate the random shit
-		vert.xyz += addv * ampB; // add the random shit to vert
-		vert = inverse( mat ) * vert; // back to original state
+  mat4 mat = modelMatrix; // get model matrix (contains translate, rotate, scale and skew)
+  mat = mat4(
+    length( mat[0].xyz ), 0.0, 0.0, 0.0,
+    0.0, length( mat[1].xyz ), 0.0, 0.0,
+    0.0, 0.0, length( mat[2].xyz ), 0.0,
+    0.0, 0.0, 0.0, 1.0
+  ); // extracts 100% organic scaling component from matrix
+  vec4 vert = mat * vec4( gl_Vertex.xyz, 1.0 ); // get vertex data and apply the matrix
+  vec3 addv = ( texture2D(
+    samplerRandom,
+    mod( vert.xy * 0.01, 1.0 ) ).xyz - 0.5
+  ) * 300.0; // generate some random shit based from position of vertices
+  addv.yz = rotate2D( time * 4.5 ) * addv.yz; // rotate the random shit
+  addv.zx = rotate2D( time * 3.8 ) * addv.zx; // rotate the random shit
+  vert.xyz += addv * ampB; // add the random shit to vert
+  vert = inverse( mat ) * vert; // back to original state
 
-		gl_Position = (gl_ModelViewProjectionMatrix * vert);
-		position = vert.xyz;
+  gl_Position = (gl_ModelViewProjectionMatrix * vert);
+  position = vert.xyz;
 
-		gl_TexCoord[0] = (gl_TextureMatrix[0] * gl_MultiTexCoord0 * TextureMatrixScale) + (gl_MultiTexCoord0 * (vec4(1)-TextureMatrixScale));
-		textureCoord = ((gl_TextureMatrix[0] * gl_MultiTexCoord0 * TextureMatrixScale) + (gl_MultiTexCoord0 * (vec4(1)-TextureMatrixScale))).xy;
-		imageCoord = textureCoord * textureSize / imageSize;
+  gl_TexCoord[0] = (gl_TextureMatrix[0] * gl_MultiTexCoord0 * TextureMatrixScale) + (gl_MultiTexCoord0 * (vec4(1)-TextureMatrixScale));
+  textureCoord = ((gl_TextureMatrix[0] * gl_MultiTexCoord0 * TextureMatrixScale) + (gl_MultiTexCoord0 * (vec4(1)-TextureMatrixScale))).xy;
+  imageCoord = textureCoord * textureSize / imageSize;
 
-		vec3 col = gl_Color.rgb;
-		col = hs(col, texture2D(samplerRandom, mod(vec2(time, gl_Vertex.z) * 0.01, 1.0)) * ampB); // fuck it. hue shift
-
-		col = mix(col, vec3(1.0), stealth);
-		
-		gl_FrontColor = vec4(col, 1.0 - alpha);
-		color = vec4(col, 1.0 - alpha);
+  gl_FrontColor = gl_Color;
+  color = gl_Color;
   }
+
 }
