@@ -682,14 +682,6 @@
 		proxy2.notefield[2]:hidden(1)
 	end}
 
-	spellcard {176, 212, color = {.2, 0, .7, 1}, name = 'glitch2.frag and RotationY in The Adventure For Readability'}
-	spellcard {212, 240, color = {.1, 0, .9, 1}, name = 'RotationY\'s unwanted twin brother'}
-	spellcard {252, 274, color = {.6, 0, .4, 1}, name = 'Wake Up 2'}
-	spellcard {274, 276, color = {.5, .5, .5, 1}, name = 'lets go'}
-	spellcard {276, 304, color = {.7, 0, 0, 1}, name = 'Heard ya liked Finorza'}
-	spellcard {304, 340, color = {.9, 0, 0, 1}, name = 'Dial-Up Screaming'}
-	spellcard {340, 372, color = {.6, .2, .9, 1}, name = 'Revert \34Revert \34Revert \34Revert \34Revert \34Revert \34recycling proxies be liek\34\34\34'}
-
 end)"
 	Type = "ActorFrame"
 ><children>
